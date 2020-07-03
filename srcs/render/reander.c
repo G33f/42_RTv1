@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   reander.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/03 15:16:15 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 15:16:19 by wpoudre          ###   ########.fr       */
+/*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
+/*   Updated: 2020/07/03 21:06:12 by wpoudre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rtv1"
 
-void	test(t_data *p)
+int ray_tracing()
 {
-	render(p, init_orb(0, 0, 750, 20, 0xFF0000));
+
 }
 
-int main()
+int reader(t_data *p, t_orb *orb)
 {
-	t_data	p;
+	int i;
+	int j;
 
-	init(&p);
-	test(&p);
-	mlx_put_image_to_window(p.mlx.mlx, p.mlx.win, p.img.img, 0, 0);
-	mlx_loop(p.mlx.mlx);
-	return(0);
+	i = 0;
+	while(i < p->camera.canv_h)
+	{
+		j = 0;
+		while(j < p->camera.canv_w)
+		{
+
+			j++;
+		}
+		i++;
+	}
 }

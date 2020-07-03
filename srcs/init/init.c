@@ -22,3 +22,10 @@ int camera_init(t_data *p)
 	p->camera.z = 0;
 	return(0);
 }
+
+int	init(t_data *p)
+{
+	camera_init(p);
+	init_mlx(p);
+	return(0);
+}

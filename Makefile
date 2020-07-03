@@ -12,7 +12,7 @@
 
 NAME			= RTv1
 
-SOURSE_DIRS		:= srcs
+SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render
 
 FLAGS			= -Wall -Werror -Wextra
 
@@ -22,7 +22,7 @@ SEARCH_WILDCARDS:= $(addsuffix /*.c, $(SOURSE_DIRS))
 
 OBJECTS			= $(notdir $(patsubst %.c,%.o, $(wildcard $(SEARCH_WILDCARDS))))
 
-LIB_DIR		= ./libft/
+LIB_DIR			= ./libft/
 
 LIB_OBJS		= $(addprefix $(LIB_DIR), $(LIB_OBJ))
 
