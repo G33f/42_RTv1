@@ -14,5 +14,7 @@
 
 int mian()
 {
+	t_data	dara;
 
+	return(0);
 }

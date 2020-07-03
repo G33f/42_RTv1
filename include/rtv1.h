@@ -18,6 +18,59 @@
 #include "libft.h"
 #include "../minilibx/mlx.h"
 
+#define WIN_SIZE_X	1024;
+#define WIN_SIZE_Y	720;
+
+typedef struct		s_orb
+{
+	int				x;
+	int				y;
+	int				z;
+	double			r;
+	int				color;
+}					t_orb;
+
+typedef struct		s_camera
+{
+	double			x;
+	double			y;
+	double			z;
+	int				canv_h;
+	int				canv_w;
+	int				canv_d;
+}					t_camera;
+
+typedef struct		s_img
+{
+	void			*img;
+	int				bit_per_pixel;
+	int				size_line;
+	int				endline;
+	int				*img_data;
+}					t_img;
+
+typedef struct		s_mlx
+{
+	void			*win;
+	void			*mlx;
+}					t_mlx;
+
+typedef struct		s_data
+{
+	t_img			img;
+	t_mlx			mlx;
+	t_camera		camera;
+}					t_data;
+
+////init------------------------------------------
+int					camera_init(t_data *p);
+int 				init(t_data *p);
+void				init_mlx(t_data *p);
+void				init_mlx_params(t_data *p);
+////error-----------------------------------------
+void				usage(int cod);
+void				error(int cod);
+void				error_log(int cod);
 
 
 #endif
