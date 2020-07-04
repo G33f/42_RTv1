@@ -88,7 +88,7 @@ SRC =           ft_bzero.c\
 
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
-INCLUDES = ../header/
+INCLUDES = ../include/
 
 all: $(NAME)
 

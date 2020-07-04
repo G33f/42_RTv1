@@ -18,8 +18,8 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define WIN_SIZE_X	1024;
-# define WIN_SIZE_Y	720;
+# define	WIN_SIZE_X	1024
+# define	WIN_SIZE_Y	720
 
 typedef struct		s_orb
 {
@@ -29,6 +29,13 @@ typedef struct		s_orb
 	double			r;
 	int				color;
 }					t_orb;
+
+typedef struct		s_vector
+{
+	double			x;
+	double			y;
+	double			z;
+}					t_vector;
 
 typedef struct		s_camera
 {
@@ -68,7 +75,18 @@ int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
 ////init figures----------------------------------
-t_orb				*orb_init(int x, int y, int z, int r, int color);
+t_orb				orb_init(int x, int y, int z, int r, int color);
+////render----------------------------------------
+int					render(t_data *p, t_orb *orb);
+int					ray_tracing(t_data *p, t_vector r, t_orb *o);
+int					drow(t_data *p);
+////vector---------------------------------------
+t_vector			vec_mult_cst(t_vector a, int t);
+t_vector			vec_diff(t_vector a, t_vector b);
+t_vector			vec_sum(t_vector a, t_vector b);
+t_vector			new_vec(double x, double y, double z);
+t_vector			vec_scal_mult(t_vector a, t_vector b);
+double				vec_dot(t_vector a, t_vector b);
 ////error-----------------------------------------
 void				usage(int cod);
 void				error(int cod);

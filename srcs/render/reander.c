@@ -10,27 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1"
+#include "rtv1.h"
 
-int ray_tracing()
+int	ray_tracing(t_data *p, t_vector r, t_orb *o)
 {
+	t_vector	d;
+	t_vector	oc;
+	double		disk;
+	double		t1;
+	double		t2;
 
+	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
+	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z),
+			new_vec(o->x, o->y, o->z));
+	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
+			(vec_dot(oc, oc) - pow(o->r, 2)));
+	if (disk < 0)
+		return(0);
+	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
+	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
+	if (t1 >= p->camera.canv_d || t2 >= p->camera.canv_d)
+		return(o->color);
+	return(0);
 }
 
-int reader(t_data *p, t_orb *orb)
+int render(t_data *p, t_orb *orb)
 {
 	int i;
 	int j;
+	int x;
+	int y;
 
+	y = p->camera.x - p->camera.canv_h / 2;
 	i = 0;
-	while(i < p->camera.canv_h)
+	while(y < p->camera.x + p->camera.canv_h / 2)
 	{
 		j = 0;
-		while(j < p->camera.canv_w)
+		x = p->camera.y + p->camera.canv_w / 2;
+		while(x < p->camera.y + p->camera.canv_w / 2)
 		{
-
-			j++;
+			p->canv.img_data[i * p->camera.canv_w + j] = ray_tracing(p,
+					new_vec(x, y, p->camera.canv_d), orb);
+			x++;
+			i++;
 		}
-		i++;
+		y++;
+		j++;
 	}
+	return(0);
 }

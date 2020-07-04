@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   vec_multiply.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/03 15:54:36 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 15:54:41 by wpoudre          ###   ########.fr       */
+/*   Created: 2020/07/04 02:16:40 by wpoudre           #+#    #+#             */
+/*   Updated: 2020/07/04 02:16:42 by wpoudre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int camera_init(t_data *p)
+double		vec_dot(t_vector a, t_vector b)
 {
-	p->camera.canv_h = 500;
-	p->camera.canv_w = 500;
-	p->camera.canv_d = 500;
-	p->camera.x = 0;
-	p->camera.y = 0;
-	p->camera.z = 0;
-	return(0);
+	a = vec_scal_mult(a, b);
+	return(a.x + a.y + a.z);
 }
 
-int	init(t_data *p)
+t_vector	vec_scal_mult(t_vector a, t_vector b)
 {
-	camera_init(p);
-	init_mlx(p);
-	return(0);
+	a.x *= b.x;
+	a.y *= b.y;
+	a.z *= b.z;
+	return(a);
+}
+
+t_vector	vec_mult_cst(t_vector a, int t)
+{
+	a.x *= t;
+	a.y *= t;
+	a.z *= t;
+	return(a);
 }

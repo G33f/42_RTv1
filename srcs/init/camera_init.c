@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-t_orb	*orb_init(int x, int y, int z, int r, int color)
+t_orb	orb_init(int x, int y, int z, int r, int color)
 {
 	t_orb orb;
 
@@ -21,23 +21,28 @@ t_orb	*orb_init(int x, int y, int z, int r, int color)
 	orb.z = z;
 	orb.r = r;
 	orb.color = color;
-	return(&orb);
+	return(orb);
 }
 
 void	init_mlx(t_data *p)
 {
+	int w;
+	int h;
+
+	w = WIN_SIZE_X;
+	h = WIN_SIZE_Y;
 	if(!(p->mlx.mlx = mlx_init()))
 		error(-13);
-	if(!(p->mlx.win = mlx_new_window(p->mlx.mlx, WIN_SIZE_X, WIN_SIZE_Y, "wolf3d")))
+	if(!(p->mlx.win = mlx_new_window(p->mlx.mlx, w, h, "wolf3d")))
 		error(-13);
-	if(!(p->img.img = mlx_new_image(p->mlx.mlx, WIN_SIZE_X, WIN_SIZE_Y)))
+	if(!(p->img.img = mlx_new_image(p->mlx.mlx, w, h)))
 		error(-13);
 	if(!(p->img.img_data = (int *)mlx_get_data_addr(p->img.img, &p->img.bit_per_pixel,
 			&p->img.size_line, &p->img.endline)))
 		error(-13);
-	if(!(p->canv.img = mlx_new_image(p->mlx.mlx, w, h)))
+	if(!(p->canv.img = mlx_new_image(p->mlx.mlx, p->camera.canv_w, p->camera.canv_h)))
 		error(-13);
-	if(!(p->canv.img_data = (int *)mlx_get_data_addr(p->canv.img, &ip->canv.bit_per_pixel,
+	if(!(p->canv.img_data = (int *)mlx_get_data_addr(p->canv.img, &p->canv.bit_per_pixel,
 			&p->canv.size_line, &p->canv.endline)))
 		error(-13);
 }

@@ -12,7 +12,7 @@
 
 NAME			= RTv1
 
-SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render
+SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors
 
 FLAGS			= -Wall -Werror -Wextra
 
@@ -28,9 +28,9 @@ LIB_OBJS		= $(addprefix $(LIB_DIR), $(LIB_OBJ))
 
 LIB_OBJ			= *.o
 
-FDF_INC			= header/fractol.h
+RT_INC			= include/rtv1.h
 
-LIB_INC			= header/libft.h
+LIB_INC			= include/libft.h
 
 all: $(NAME)
 
@@ -42,8 +42,8 @@ VPATH := $(SOURSE_DIRS)
 $(LIB_DIR)%.o: $(LIB_DIR)%.c $(LIB_INC)
 	make -C $(LIB_DIR)
 
-%.o: %.c $(FDF_INC)
-	gcc $(FLAGS) -c $< -I header/
+%.o: %.c $(RT_INC)
+	gcc $(FLAGS) -c $< -I include/
 
 clean:
 	make clean -C libft
