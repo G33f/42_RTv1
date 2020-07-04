@@ -12,6 +12,11 @@
 
 #include "rtv1.h"
 
+double			vec_length(t_vector a)
+{
+	return(sqrt(pow(a.x, 2) + pow(a.x, 2) + pow(a.x, 2)));
+}
+
 t_vector	vec_diff(t_vector a, t_vector b)
 {
 	a.x -= b.x;

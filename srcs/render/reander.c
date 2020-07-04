@@ -26,14 +26,17 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o)
 	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
 			(vec_dot(oc, oc) - pow(o->r, 2)));
 	if (disk < 0)
-	{
-		return (0xFFFFFF);
-	}
+		return (0);
 	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
 	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
 	if (t1 > 0 || t2 > 0)
-		return(o->color);
-	return(0xFFFFFF);
+	{
+		if (t1 < t2 && t1 > 0)
+			return (get_color(t2, p, d, o));
+		else if (t1 > t2 && t2 > 0)
+			return (get_color(t2, p, d, o));
+	}
+	return(0);
 }
 
 int render(t_data *p, t_orb *orb)

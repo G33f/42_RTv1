@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_multiply.c                                     :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/04 02:16:40 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/04 02:16:42 by wpoudre          ###   ########.fr       */
+/*   Created: 2020/07/04 10:20:34 by wpoudre           #+#    #+#             */
+/*   Updated: 2020/07/04 10:20:45 by wpoudre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double		vec_dot(t_vector a, t_vector b)
+int		color(int color, double i)
 {
-	a = vec_scal_mult(a, b);
-	return(a.x + a.y + a.z);
-}
+	int		red;
+	int		green;
+	int		blue;
 
-t_vector	vec_scal_mult(t_vector a, t_vector b)
-{
-	a.x *= b.x;
-	a.y *= b.y;
-	a.z *= b.z;
-	return(a);
-}
-
-t_vector	vec_mult_cst(t_vector a, double t)
-{
-	a.x *= t;
-	a.y *= t;
-	a.z *= t;
-	return(a);
-}
-
-t_vector	vec_divis_cst(t_vector a, double t)
-{
-	a.x /= t;
-	a.y /= t;
-	a.z /= t;
-	return (a);
+	red = (color >> 16) & 0xFF;
+	red = (int)(red * i);
+	green = (color >> 8) & 0xFF;
+	green = (int)(green * i);
+	blue = (color & 0xFF);
+	blue = (int)(blue * i);
+	return ((red << 16) | (green << 8) | blue);
 }

@@ -81,12 +81,21 @@ int					render(t_data *p, t_orb *orb);
 int					ray_tracing(t_data *p, t_vector r, t_orb *o);
 int					drow(t_data *p);
 ////vector---------------------------------------
-t_vector			vec_mult_cst(t_vector a, int t);
+t_vector			vec_mult_cst(t_vector a, double t);
 t_vector			vec_diff(t_vector a, t_vector b);
 t_vector			vec_sum(t_vector a, t_vector b);
 t_vector			new_vec(double x, double y, double z);
 t_vector			vec_scal_mult(t_vector a, t_vector b);
 double				vec_dot(t_vector a, t_vector b);
+double				vec_length(t_vector a);
+t_vector			vec_divis_cst(t_vector a, double t);
+////light-----------------------------------------
+double				light_ambient();
+double				light_point(t_vector p, t_vector n);
+double				light_direction(t_vector n);
+double				light_intens(t_vector p, t_vector n);
+int					color(int color, double i);
+int					get_color(double t, t_data *q, t_vector d, t_orb *o);
 ////error-----------------------------------------
 void				usage(int cod);
 void				error(int cod);
