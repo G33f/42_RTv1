@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="RTv1"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/wpoudre/Desktop/RTv1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/wpoudre/Desktop/RTv1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/wpoudre/Desktop/RTv1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RTv1">
+				<Option output="/Users/wpoudre/Desktop/RTv1/cmake-build-debug/RTv1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wpoudre/Desktop/RTv1/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/wpoudre/Desktop/RTv1/include"/>
+					<Add directory="/Users/wpoudre/Desktop/RTv1/minilibx"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 RTv1"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RTv1/fast">
+				<Option output="/Users/wpoudre/Desktop/RTv1/cmake-build-debug/RTv1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wpoudre/Desktop/RTv1/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/wpoudre/Desktop/RTv1/include"/>
+					<Add directory="/Users/wpoudre/Desktop/RTv1/minilibx"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 RTv1/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wpoudre/Desktop/RTv1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/include/libft.h">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/include/rtv1.h">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_alpdown.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_alpup.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_atoi.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_bzero.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_cu_wards.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_isalnum.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_isalpha.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_isascii.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_isdigit.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_isprint.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_itoa.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_lstadd.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_lstdel.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_lstdelone.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_lstiter.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_lstmap.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_lstnelem.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_lstnew.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_matcp.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_matdel.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memalloc.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memccpy.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memchr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memcmp.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memcpy.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memdel.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memmove.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_memset.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_pow.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putchar.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putchar_fd.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putendl.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putendl_fd.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putmat.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putnbr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putnbr_fd.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putstr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_putstr_fd.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_sqrt.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strcat.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strchr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strclr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strcmp.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strcpy.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strdel.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strdup.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strequ.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_striter.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_striteri.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strjoin.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strjoinfree.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strlcat.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strlen.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strmap.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strmapi.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strncat.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strncmp.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strncpy.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strndup.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strnequ.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strnew.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strnstr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strrchr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strsplit.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strstr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strsub.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_strtrim.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_tolower.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/ft_toupper.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/libft/get_next_line.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx.h">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_clear_window.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_destroy_image.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_destroy_window.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_expose_hook.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_flush_event.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_get_color_value.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_get_data_addr.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_hook.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_init.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int.h">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int_anti_resize_win.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int_do_nothing.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int_get_visual.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int_param_event.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int_set_win_event_mask.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int_str_to_wordtab.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_int_wait_first_expose.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_key_hook.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_lib_xpm.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_loop.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_loop_hook.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_mouse_hook.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_new_image.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_new_window.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_pixel_put.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_put_image_to_window.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_rgb.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_string_put.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/mlx_xpm.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/test/main.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/minilibx/test/new_win.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/error/error.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/init/camera_init.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/init/init.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/main/main.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/render/drow.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/render/reander.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/vectors/vec_multiply.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/srcs/vectors/vectors.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/wpoudre/Desktop/RTv1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

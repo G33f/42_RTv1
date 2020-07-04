@@ -14,9 +14,9 @@
 
 int camera_init(t_data *p)
 {
-	p->camera.canv_h = 500;
-	p->camera.canv_w = 500;
-	p->camera.canv_d = 500;
+	p->camera.canv_h = 2500;
+	p->camera.canv_w = 2500;
+	p->camera.canv_d = 2500;
 	p->camera.x = 0;
 	p->camera.y = 0;
 	p->camera.z = 0;

@@ -16,7 +16,7 @@ void	test(t_data *p)
 {
 	t_orb o;
 
-	o = orb_init(0, 0, 550, 20, 60000);
+	o = orb_init(0, 0, 100, 20, 0xFF0000);
 	render(p, &o);
 	drow(p);
 }

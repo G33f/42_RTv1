@@ -26,12 +26,14 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o)
 	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
 			(vec_dot(oc, oc) - pow(o->r, 2)));
 	if (disk < 0)
-		return(0);
+	{
+		return (0xFFFFFF);
+	}
 	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
 	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
-	if (t1 >= p->camera.canv_d || t2 >= p->camera.canv_d)
+	if (t1 > 0 || t2 > 0)
 		return(o->color);
-	return(0);
+	return(0xFFFFFF);
 }
 
 int render(t_data *p, t_orb *orb)
@@ -43,19 +45,19 @@ int render(t_data *p, t_orb *orb)
 
 	y = p->camera.x - p->camera.canv_h / 2;
 	i = 0;
-	while(y < p->camera.x + p->camera.canv_h / 2)
+	while(y < p->camera.y + p->camera.canv_h / 2)
 	{
 		j = 0;
-		x = p->camera.y + p->camera.canv_w / 2;
-		while(x < p->camera.y + p->camera.canv_w / 2)
+		x = p->camera.x - p->camera.canv_w / 2;
+		while(x < p->camera.x + p->camera.canv_w / 2)
 		{
 			p->canv.img_data[i * p->camera.canv_w + j] = ray_tracing(p,
 					new_vec(x, y, p->camera.canv_d), orb);
 			x++;
-			i++;
+			j++;
 		}
 		y++;
-		j++;
+		i++;
 	}
 	return(0);
 }
