@@ -15,11 +15,12 @@
 # define RTV1_H
 
 # include <math.h>
+#include <stdio.h>
 # include "libft.h"
 # include "mlx.h"
 
 # define	WIN_SIZE_X	1024
-# define	WIN_SIZE_Y	720
+# define	WIN_SIZE_Y	960
 
 typedef struct		s_orb
 {
@@ -86,6 +87,7 @@ t_vector			vec_diff(t_vector a, t_vector b);
 t_vector			vec_sum(t_vector a, t_vector b);
 t_vector			new_vec(double x, double y, double z);
 t_vector			vec_scal_mult(t_vector a, t_vector b);
+t_vector			rev_vec(t_vector a);
 double				vec_dot(t_vector a, t_vector b);
 double				vec_length(t_vector a);
 t_vector			vec_divis_cst(t_vector a, double t);
@@ -100,5 +102,8 @@ int					get_color(double t, t_data *q, t_vector d, t_orb *o);
 void				usage(int cod);
 void				error(int cod);
 void				error_log(int cod);
-
+////testing---------------------------------------
+void				test(t_data *p);
+void 				print_vec(t_vector v);
+t_vector			rev_vec(t_vector a);
 #endif

@@ -14,7 +14,8 @@
 
 double			vec_length(t_vector a)
 {
-	return(sqrt(pow(a.x, 2) + pow(a.x, 2) + pow(a.x, 2)));
+
+	return(sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
 }
 
 t_vector	vec_diff(t_vector a, t_vector b)

@@ -12,6 +12,14 @@
 
 #include "rtv1.h"
 
+t_vector		rev_vec(t_vector a)
+{
+	a.x = -a.x;
+	a.y = -a.y;
+	a.z = -a.z;
+	return (a);
+}
+
 double		vec_dot(t_vector a, t_vector b)
 {
 	a = vec_scal_mult(a, b);

@@ -16,7 +16,7 @@ SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors src
 
 FLAGS			= -Wall -Werror -Wextra
 
-framework		= -L minilibx -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L libft -lft
+framework		= -L minilibx_macos -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L libft -lft
 
 SEARCH_WILDCARDS:= $(addsuffix /*.c, $(SOURSE_DIRS))
 

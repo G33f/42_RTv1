@@ -26,8 +26,8 @@ double	light_point(t_vector p, t_vector n)
 	t_vector	l;
 	double		n_dot_l;
 
-	intens = 0.3;
-	l = new_vec(2, 1, 0);
+	intens = 0.6;
+	l = new_vec(1, 2, 0);
 	l = vec_diff(l, p);
 	n_dot_l = vec_dot(n, l);
 	if (n_dot_l > 0)
@@ -42,8 +42,9 @@ double	light_direction(t_vector n)
 	t_vector	l;
 	double		n_dot_l;
 
-	intens = 0.6;
+	intens = 0.2;
 	l = new_vec(1, 4, 4);
+	l = rev_vec(l);
 	n_dot_l = vec_dot(n, l);
 	if (n_dot_l > 0)
 		return(intens * n_dot_l / (vec_length(n) * vec_length(l)));
@@ -53,7 +54,7 @@ double	light_direction(t_vector n)
 
 double	light_intens(t_vector p, t_vector n)
 {
-	return(light_direction(n) + light_point(p, n) + light_ambient());
+	return (light_direction(n) + light_point(p, n) + light_ambient());
 }
 
 int get_color(double t, t_data *q, t_vector d, t_orb *o)
