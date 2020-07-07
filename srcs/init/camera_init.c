@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:55:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 15:55:14 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/07 15:00:47 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_mlx(t_data *p)
 	h = WIN_SIZE_Y;
 	if(!(p->mlx.mlx = mlx_init()))
 		error(-13);
-	if(!(p->mlx.win = mlx_new_window(p->mlx.mlx, w, h, "wolf3d")))
+	if(!(p->mlx.win = mlx_new_window(p->mlx.mlx, w, h, "RTv1")))
 		error(-13);
 	if(!(p->img.img = mlx_new_image(p->mlx.mlx, w, h)))
 		error(-13);

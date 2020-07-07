@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 15:23:22 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/07 20:30:07 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,24 @@
 #include <stdio.h>
 # include "libft.h"
 # include "mlx.h"
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
 
 # define	WIN_SIZE_X	1024
 # define	WIN_SIZE_Y	960
+
+typedef struct		s_obj
+{
+	int				x;
+	int				y;
+	int				z;
+	double				r;
+	int				color;
+	char			*type;
+}					t_obj;
 
 typedef struct		s_orb
 {
@@ -69,6 +84,10 @@ typedef struct		s_data
 	t_mlx			mlx;
 	t_img			canv;
 	t_camera		camera;
+	//t_obj			*obj;
+	int				obj_n;
+	int				fd;
+	int				line_nbr;
 }					t_data;
 
 ////init------------------------------------------
@@ -103,7 +122,12 @@ void				usage(int cod);
 void				error(int cod);
 void				error_log(int cod);
 ////testing---------------------------------------
-void				test(t_data *p);
+void				test(t_data *p, char **av);
 void 				print_vec(t_vector v);
 t_vector			rev_vec(t_vector a);
+
+////keys------------------------------------------
+int					key_press(int key, t_data *p);
+int					escape(void);
+
 #endif

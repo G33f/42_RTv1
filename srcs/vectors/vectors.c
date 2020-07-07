@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 01:05:33 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/04 01:05:37 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/07 20:33:07 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ double			vec_length(t_vector a)
 
 t_vector	vec_diff(t_vector a, t_vector b)
 {
+	//ft_putstr("vec_diff\n");
 	a.x -= b.x;
 	a.y -= b.y;
 	a.z -= b.z;

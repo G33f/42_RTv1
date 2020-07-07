@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reander.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 21:06:12 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/07 20:32:02 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,22 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o)
 	double		t1;
 	double		t2;
 
+	//ft_putstr("raytracing\n");
+	//printf("%d %d %d\n", o->x, o->y, o->z);
 	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
 	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z),
 			new_vec(o->x, o->y, o->z));
 	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
 			(vec_dot(oc, oc) - pow(o->r, 2)));
+	//printf("%f\n", disk);
 	if (disk <= 0)
+	{
+		//ft_putstr("disk < 0\n");
 		return (0);
+	}
 	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
 	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
+	//printf("%f %f\n", t1, t2);
 	if (t1 > 0 || t2 > 0)
 	{
 		if (t1 < t2 && t1 > 0)
@@ -45,6 +52,8 @@ int render(t_data *p, t_orb *orb)
 	int j;
 	int x;
 	int y;
+
+	//ft_putstr("render\n");
 
 	y = p->camera.x - p->camera.canv_h / 2;
 	i = 0;
