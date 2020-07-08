@@ -14,7 +14,6 @@
 
 double			vec_length(t_vector a)
 {
-
 	return(sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
 }
 

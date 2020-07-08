@@ -28,6 +28,7 @@ typedef struct		s_orb
 	int				y;
 	int				z;
 	double			r;
+	double			specular;
 	int				color;
 }					t_orb;
 
@@ -76,7 +77,7 @@ int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
 ////init figures----------------------------------
-t_orb				orb_init(int x, int y, int z, int r, int color);
+t_orb				orb_init(int x, int y, int z, int r, int color, double spec);
 ////render----------------------------------------
 int					render(t_data *p, t_orb *orb);
 int					ray_tracing(t_data *p, t_vector r, t_orb *o);
@@ -93,9 +94,10 @@ double				vec_length(t_vector a);
 t_vector			vec_divis_cst(t_vector a, double t);
 ////light-----------------------------------------
 double				light_ambient();
-double				light_point(t_vector p, t_vector n);
-double				light_direction(t_vector n);
-double				light_intens(t_vector p, t_vector n);
+double				light_point(t_vector p, t_vector n, t_vector v, double s);
+double				light_direction(t_vector n, t_vector v, double s);
+double				light_intens(t_vector p, t_vector n, t_vector v, double s);
+double				spec(t_vector n, t_vector l, t_vector v, double s, double i);
 int					color(int color, double i);
 int					get_color(double t, t_data *q, t_vector d, t_orb *o);
 ////error-----------------------------------------

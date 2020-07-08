@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-t_orb	orb_init(int x, int y, int z, int r, int color)
+t_orb	orb_init(int x, int y, int z, int r, int color, double spec)
 {
 	t_orb orb;
 
@@ -21,6 +21,7 @@ t_orb	orb_init(int x, int y, int z, int r, int color)
 	orb.z = z;
 	orb.r = r;
 	orb.color = color;
+	orb.specular = spec;
 	return(orb);
 }
 
