@@ -6,55 +6,55 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 07:32:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/09 19:20:59 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/09 20:42:20 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double	light_ambient()
+/*double	light_ambient()
 {
 	double	intens;
 
 	intens = 0.2;
 	return(intens);
-}
+}*/
 
-double	light_point(t_vector p, t_vector n)
+double	light_point(t_vector p, t_vector n, t_data *q)
 {
-	double		intens;
-	t_vector	l;
+	//double		intens;
+	//t_vector	l;
 	double		n_dot_l;
 
-	intens = 0.6;
-	l = new_vec(1, 2, 0);
-	l = vec_diff(l, p);
-	n_dot_l = vec_dot(n, l);
+	//intens = 0.6;
+	//l = new_vec(1, 2, 0);
+	q->l_p = vec_diff(q->l_p, p);
+	n_dot_l = vec_dot(n, q->l_p);
 	if (n_dot_l > 0)
-		return(intens * n_dot_l / (vec_length(n) * vec_length(l)));
+		return(q->intens_p * n_dot_l / (vec_length(n) * vec_length(q->l_p)));
 	else
 		return(0.0);
 }
 
-double	light_direction(t_vector n)
+double	light_direction(t_vector n, t_data *q)
 {
-	double		intens;
-	t_vector	l;
+	//double		intens;
+	//t_vector	l;
 	double		n_dot_l;
 
-	intens = 0.2;
-	l = new_vec(1, 4, 4);
-	l = rev_vec(l);
-	n_dot_l = vec_dot(n, l);
+	//intens = 0.2;
+	//l = new_vec(1, 4, 4);
+	//l = rev_vec(l);
+	n_dot_l = vec_dot(n, q->l_d);
 	if (n_dot_l > 0)
-		return(intens * n_dot_l / (vec_length(n) * vec_length(l)));
+		return(q->intens_d * n_dot_l / (vec_length(n) * vec_length(q->l_d)));
 	else
 		return(0.0);
 }
 
 double	light_intens(t_vector p, t_vector n, t_data *q)
 {
-	return (light_direction(n) + light_point(p, n) + q->ambient);
+	return (light_direction(n, q) + light_point(p, n, q) + q->ambient);
 }
 
 int get_color(double t, t_data *q, t_vector d, t_obj o)

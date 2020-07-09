@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:16:15 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/09 19:33:53 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/09 20:53:12 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,36 @@ int		sphere(t_data *p, int *n, char *line)
 	return (0);
 }
 
+int		set_light(t_data *p, char **tab)
+{
+	char	**tab1;
+
+	ft_putstr("set light\n");
+	tab1 = ft_strsplit(tab[2], ',');
+	printf("len_tab in light = %d\n", len_tab(tab1));
+	if (len_tab(tab1) < 4)
+	{
+		free_tab(tab1);
+		return (-1);
+	}
+	if (ft_strequ(tab[0], "light") && ft_strequ(tab[1], "point"))
+	{
+		ft_putstr("l_p, intens\n");
+		p->l_p = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]));
+		ft_putstr("l_p, intens after new vec\n");
+		p->intens_p = strtod(tab1[3], NULL);
+		ft_putstr("l_p, intens\n");
+	}
+	if (ft_strequ(tab[0], "light") && ft_strequ(tab[0], "direction"))
+	{
+		p->l_d = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]));
+		p->l_d = rev_vec(p->l_d);
+		p->intens_d = strtod(tab1[3], NULL);
+	}
+	free_tab(tab1);
+	return (0);
+}
+
 int		create_obj(t_data *p, char *line, int *n) // какой именно объект
 {
 	//char	*l;
@@ -186,9 +216,12 @@ int		create_obj(t_data *p, char *line, int *n) // какой именно объ
 		plane(p, n);*/
 	if (ft_strequ(tab[0], "camera"))
 		camera(p, tab);
-	/*if (ft_strequ(tab[0], "light"))
-		light(p, n);
-	if (ft_strequ(tab[0], "ambient"))*/
+	if (ft_strequ(tab[0], "light"))
+	{
+		set_light(p, tab);
+		ft_putstr("after set light\n");
+	}
+	if (ft_strequ(tab[0], "ambient"))
 		p->ambient = strtod(tab[1], NULL);
 	/*if (ft_strequ(tab[0], "specular"))
 		p->specular = strtod(tab[1], NULL);*/
@@ -227,7 +260,7 @@ int		read_file(t_data *p, char *file)
 		//ft_putstr("in a loop\n");
 		free(line);
 	}
-	//ft_putstr("after create object\n");
+	ft_putstr("after create object\n");
 	p->line_nbr = i;
 	printf("%d %d %d %f %d %d\n", p->obj[0].x, p->obj[0].y, p->obj[0].z, p->obj[0].r, p->obj[0].color, p->obj[0].type);
 	printf("%f %f %f\n%d %d %d\n", p->camera.x, p->camera.x, p->camera.x, p->camera.canv_h, p->camera.canv_w, p->camera.canv_d);

@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/09 19:29:40 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/09 20:42:46 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ typedef struct		s_data
 	t_img			canv;
 	t_camera		camera;
 	t_obj			*obj;
+	t_vector		l_p;
+	t_vector		l_d;
+	double			intens_p;
+	double			intens_d;
 	int				obj_n;
 	int				fd;
 	int				line_nbr;
@@ -119,8 +123,8 @@ t_vector			vec_divis_cst(t_vector a, double t);
 t_vector			rev_vec(t_vector a);
 ////light-----------------------------------------
 double				light_ambient();
-double				light_point(t_vector p, t_vector n);
-double				light_direction(t_vector n);
+double				light_point(t_vector p, t_vector n, t_data *q);
+double				light_direction(t_vector n, t_data *q);
 double				light_intens(t_vector p, t_vector n, t_data *q);
 int					color(int color, double i);
 int					get_color(double t, t_data *q, t_vector d, t_obj o);
