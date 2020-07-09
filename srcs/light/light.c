@@ -46,8 +46,8 @@ double	light_point(t_vector p, t_vector n, t_vector v, double s)
 	t_vector	l;
 	double		n_dot_l;
 
-	intens = 0.3;
-	l = new_vec(0, 0, 0);
+	intens = 0.6;
+	l = new_vec(2, -1, 0);
 	l = vec_diff(l, p);
 	n_dot_l = vec_dot(n, l);
 	if (n_dot_l > 0)
@@ -62,8 +62,8 @@ double	light_direction(t_vector n, t_vector v, double s)
 	t_vector	l;
 	double		n_dot_l;
 
-	intens = 0.0;
-	l = new_vec(1, 1, -1);
+	intens = 0.2;
+	l = new_vec(1, -4, 4);
 	n_dot_l = vec_dot(n, l);
 	if (n_dot_l > 0)
 		return((intens * n_dot_l / (vec_length(n) * vec_length(l)) + spec(n, l, v, s, intens)));

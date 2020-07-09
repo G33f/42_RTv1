@@ -36,15 +36,36 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o)
 		else if (t1 > t2 && t2 > 0)
 			return (get_color(t2, p, d, o));
 	}
-	return(0);
+	return (0);
 }
 
-int render(t_data *p, t_orb *orb)
+void	render_cy(t_data *p, t_vector r, int j)
+{
+	t_list	*f;
+	t_orb	*o;
+	int		color;
+	int		i = 0;
+
+	f = p->figur;
+	while(f != NULL)
+	{
+		i++;
+		o = orb_clon(f);
+		color = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), o);
+		//printf("colol [%d] = %d\n", i, color);
+		if (color > 0)
+			p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
+		free(o);
+		f = f->next;
+	}
+}
+
+int render(t_data *p)
 {
 	int i;
 	int j;
 	int x;
-	int y;
+	int	y;
 
 	y = p->camera.x - p->camera.canv_h / 2;
 	i = 0;
@@ -54,8 +75,9 @@ int render(t_data *p, t_orb *orb)
 		x = p->camera.x - p->camera.canv_w / 2;
 		while(x < p->camera.x + p->camera.canv_w / 2)
 		{
-			p->canv.img_data[i * p->camera.canv_w + j] = ray_tracing(p,
-					new_vec(x, y, p->camera.canv_d), orb);
+			render_cy(p, new_vec(x, y, i), j);
+//			p->canv.img_data[i * p->camera.canv_w + j] = ray_tracing(p,
+//					new_vec(x, y, p->camera.canv_d), orb);
 			x++;
 			j++;
 		}

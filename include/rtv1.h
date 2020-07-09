@@ -30,6 +30,7 @@ typedef struct		s_orb
 	double			r;
 	double			specular;
 	int				color;
+	struct s_orb	*next;
 }					t_orb;
 
 typedef struct		s_vector
@@ -70,16 +71,21 @@ typedef struct		s_data
 	t_mlx			mlx;
 	t_img			canv;
 	t_camera		camera;
+	t_list			*figur;
 }					t_data;
 
 ////init------------------------------------------
 int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
+t_orb				*new_orb(t_orb new);
+void				figur_init(t_data *p);
 ////init figures----------------------------------
 t_orb				orb_init(int x, int y, int z, int r, int color, double spec);
+t_orb				*orb_clon(const t_list *o);
 ////render----------------------------------------
-int					render(t_data *p, t_orb *orb);
+int					render(t_data *p);
+void				render_cy(t_data *p, t_vector r, int j);
 int					ray_tracing(t_data *p, t_vector r, t_orb *o);
 int					drow(t_data *p);
 ////vector---------------------------------------
