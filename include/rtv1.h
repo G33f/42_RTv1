@@ -22,6 +22,7 @@
 # define	WIN_SIZE_X	1024
 # define	WIN_SIZE_Y	960
 
+
 typedef struct		s_orb
 {
 	int				x;
@@ -86,7 +87,7 @@ t_orb				*orb_clon(const t_list *o);
 ////render----------------------------------------
 int					render(t_data *p);
 void				render_cy(t_data *p, t_vector r, int j);
-int					ray_tracing(t_data *p, t_vector r, t_orb *o);
+int					ray_tracing(t_data *p, t_vector r, t_orb *o, double *t);
 int					drow(t_data *p);
 ////vector---------------------------------------
 t_vector			vec_mult_cst(t_vector a, double t);

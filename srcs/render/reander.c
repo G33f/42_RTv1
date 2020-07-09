@@ -12,7 +12,16 @@
 
 #include "rtv1.h"
 
-int	ray_tracing(t_data *p, t_vector r, t_orb *o)
+double	min(double a, double b)
+{
+	if (a < b && a > 0)
+		return (a);
+	else if (b > 0)
+		return (b);
+	return (0.0);
+}
+
+int	ray_tracing(t_data *p, t_vector r, t_orb *o, double *t)
 {
 	t_vector	d;
 	t_vector	oc;
@@ -29,12 +38,11 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o)
 		return (0);
 	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
 	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
-	if (t1 > 0 || t2 > 0)
+	t1 = min(t1, t2);
+	if (t1 < *t && t1 > 0)
 	{
-		if (t1 < t2 && t1 > 0)
-			return (get_color(t1, p, d, o));
-		else if (t1 > t2 && t2 > 0)
-			return (get_color(t2, p, d, o));
+		*t = t1;
+		return (get_color(t1, p, d, o));
 	}
 	return (0);
 }
@@ -44,20 +52,22 @@ void	render_cy(t_data *p, t_vector r, int j)
 	t_list	*f;
 	t_orb	*o;
 	int		color;
-	int		i = 0;
+	int		buf;
+	double	t;
 
 	f = p->figur;
+	color = 0;
+	t = 2147483647;
 	while(f != NULL)
 	{
-		i++;
 		o = orb_clon(f);
-		color = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), o);
-		//printf("colol [%d] = %d\n", i, color);
-		if (color > 0)
-			p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
+		buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), o, &t);
+		if (buf > 0)
+			color = buf;
 		free(o);
 		f = f->next;
 	}
+	p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
 }
 
 int render(t_data *p)
@@ -76,8 +86,6 @@ int render(t_data *p)
 		while(x < p->camera.x + p->camera.canv_w / 2)
 		{
 			render_cy(p, new_vec(x, y, i), j);
-//			p->canv.img_data[i * p->camera.canv_w + j] = ray_tracing(p,
-//					new_vec(x, y, p->camera.canv_d), orb);
 			x++;
 			j++;
 		}
