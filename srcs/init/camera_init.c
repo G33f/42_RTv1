@@ -6,13 +6,13 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:55:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/08 17:11:31 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/09 19:29:57 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-/*t_orb	orb_init(int x, int y, int z, int r, int color)
+/**t_orb	orb_init(int x, int y, int z, int r, int color)
 {
 	t_orb orb;
 

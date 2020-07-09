@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 07:32:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/08 18:06:38 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/09 19:20:59 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ double	light_intens(t_vector p, t_vector n, t_data *q)
 	return (light_direction(n) + light_point(p, n) + q->ambient);
 }
 
-int get_color(double t, t_data *q, t_vector d, t_obj *obj)
+int get_color(double t, t_data *q, t_vector d, t_obj o)
 {
 	t_vector	n;
 	t_vector	p;
 
 	p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
 			vec_mult_cst(d, t));
-	n = vec_diff(p, new_vec(obj->x, obj->y, obj->z));
+	n = vec_diff(p, new_vec(o.x, o.y, o.z));
 	n = vec_divis_cst(n, vec_length(n));
-	return(color(obj->color, light_intens(p, n, q)));
+	return(color(o.color, light_intens(p, n, q)));
 }
