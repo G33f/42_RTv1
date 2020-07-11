@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/27 10:34:56 by wpoudre           #+#    #+#              #
-#    Updated: 2020/01/27 10:35:01 by wpoudre          ###   ########.fr        #
+#    Updated: 2020/07/11 18:11:18 by mgalt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= RTv1
 
-SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors srcs/light
+SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors srcs/light srcs/parser
 
 FLAGS			= -Wall -Werror -Wextra
 

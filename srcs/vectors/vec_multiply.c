@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_multiply.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 02:16:40 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/07 20:32:52 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/04 02:16:42 by wpoudre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_vector		rev_vec(t_vector a)
 
 double		vec_dot(t_vector a, t_vector b)
 {
-	//ft_putstr("vec_dot\n");
 	a = vec_scal_mult(a, b);
 	return(a.x + a.y + a.z);
 }

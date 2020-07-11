@@ -20,9 +20,15 @@ int		color(int color, double i)
 
 	red = (color >> 16) & 0xFF;
 	red = (int)(red * i);
+	if (red > 0x0000FF)
+		red = 0x0000FF;
 	green = (color >> 8) & 0xFF;
 	green = (int)(green * i);
+	if (green > 0x0000FF)
+		green = 0x0000FF;
 	blue = (color & 0xFF);
 	blue = (int)(blue * i);
+	if (blue > 0x0000FF)
+		blue = 0x0000FF;
 	return ((red << 16) | (green << 8) | blue);
 }

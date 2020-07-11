@@ -6,13 +6,13 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:55:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/09 19:29:57 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/11 14:50:53 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-/**t_orb	orb_init(int x, int y, int z, int r, int color)
+t_orb	orb_init(int x, int y, int z, int r, int color, double spec)
 {
 	t_orb orb;
 
@@ -21,8 +21,9 @@
 	orb.z = z;
 	orb.r = r;
 	orb.color = color;
+	orb.specular = spec;
 	return(orb);
-}*/
+}
 
 void	init_mlx(t_data *p)
 {
@@ -46,3 +47,4 @@ void	init_mlx(t_data *p)
 			&p->canv.size_line, &p->canv.endline)))
 		error(-13);
 }
+
