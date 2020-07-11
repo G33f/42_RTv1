@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:16:20 by mgalt             #+#    #+#             */
-/*   Updated: 2020/07/11 18:43:12 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/11 19:15:02 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,6 @@ t_orb	*new_orb(t_orb new)
 	orb->next = NULL;
 	return (orb);
 }
-
-/*t_orb	new_orb(t_orb new)
-{
-	t_orb	orb;
-
-	//orb = (t_orb*)malloc(sizeof(t_orb));
-	orb.x = new.x;
-	orb.y = new.y;
-	orb.z = new.z;
-	orb.r = new.r;
-	orb.specular = new.specular;
-	orb.color = new.color;
-	orb.next = NULL;
-	return (orb);
-}*/
 
 int		sphere_init(t_data *p, int *n, char *line)
 {
@@ -62,7 +47,7 @@ int		sphere_init(t_data *p, int *n, char *line)
 		return (-1);
 	}
 	o1 = orb_init(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]),
-	strtod(tab1[3], NULL), ft_atoi(tab1[4]), ft_atoi(tab1[5]));
+	strtod(tab1[3], NULL), strtod(tab1[4], NULL), ft_atoi(tab1[5]));
     o2 = new_orb(o1);
 	ft_lstadd(&p->figur, ft_lstnew(o2, sizeof(t_orb)));
     free(o2);
