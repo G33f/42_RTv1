@@ -6,13 +6,13 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:55:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/11 19:13:34 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/13 15:53:28 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_orb	orb_init(int x, int y, int z, int r, int color, double spec)
+t_orb	orb_init(int x, int y, int z, int r, int color, double spec, int type)
 {
 	t_orb orb;
 
@@ -22,6 +22,7 @@ t_orb	orb_init(int x, int y, int z, int r, int color, double spec)
 	orb.r = r;
 	orb.color = color;
 	orb.specular = spec;
+	orb.type = type;
 	return(orb);
 }
 

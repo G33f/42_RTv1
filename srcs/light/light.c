@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 07:32:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/11 18:31:00 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/11 20:42:02 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,32 @@ double	light_intens(t_vector p, t_vector n, t_vector v, double s, t_data *q)
 {
 	return (light_direction(n, v, s, q) + light_point(p, n, v, s, q) + q->ambient);
 }
+
+/*int		closest(t_vector p, t_vector *l, double t_min, double t_max)
+{
+	t_vector	d;
+	t_vector	oc;
+	double		disk;
+	double		t1;
+	double		t2;
+
+	d = vec_diff(p, p->l_p);
+	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z),
+			p->l_p);
+	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
+			(vec_dot(oc, oc) - pow(o->r, 2)));
+	if (disk <= 0)
+		return (0);
+	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
+	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
+	t1 = min(t1, t2);
+	if (t1 < *t && t1 > 0)
+	{
+		*t = t1;
+		return (get_color(t1, p, d, o));
+	}
+	return (0);
+}*/
 
 int get_color(double t, t_data *q, t_vector d, t_orb *o)
 {

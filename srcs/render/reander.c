@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reander.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 21:06:12 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/13 16:28:55 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,16 @@ void	render_cy(t_data *p, t_vector r, int j)
 	t = 2147483647;
 	while(f != NULL)
 	{
-		o = orb_clon(f);
-		buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), o, &t);
-		if (buf > 0)
-			color = buf;
-		free(o);
+		if (((t_orb*)f->content)->type == SPHERE)
+		{
+			o = orb_clon(f);
+			buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), o, &t);
+			if (buf > 0)
+				color = buf;
+			free(o);
+		}
+		//else
+		//ft_putstr("not a sphere -_-\n");
 		f = f->next;
 	}
 	p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;

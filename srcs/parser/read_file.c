@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:06:23 by mgalt             #+#    #+#             */
-/*   Updated: 2020/07/11 18:45:05 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/13 16:24:30 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,37 @@ int		object_num(char *file)
 	return (n);
 }
 
+int		cone_init(t_data *p, int *n, char *line)
+{
+	t_orb	o1;
+    t_orb   *o2;
+	char	**tab1;
+	int		tab_len;
+	int		i;
+
+	i = 0;
+	*n += 1;
+	p->obj[*n].type = CONE;
+	tab1 = NULL;
+	tab1 = ft_strsplit(line, ',');
+	tab_len = len_tab(tab1);
+	if (tab_len < 6)
+	{
+		free_tab(tab1);
+		return (-1);
+	}
+	o1 = orb_init(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]),
+	strtod(tab1[3], NULL), strtod(tab1[4], NULL), ft_atoi(tab1[5]), CONE);
+	//printf("%d, %d, %d, %f, %f, %d, %d\n", ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]),
+	//strtod(tab1[3], NULL), strtod(tab1[4], NULL), ft_atoi(tab1[5]), CONE);
+	//printf("o1: %d, %d, %d, %f, %d, %f, %d\n", o1.x, o1.y, o1.z, o1.r, o1.color, o1.specular, o1.type);
+    o2 = new_orb(o1);
+	ft_lstadd(&p->figur, ft_lstnew(o2, sizeof(t_orb)));
+	//printf("o2: %d %d %d %f %f %d %d\n", o2->x, o2->y, o2->z, o2->r, o2->specular, o2->color, o2->type);
+    free(o2);
+	free_tab(tab1);
+	return (0);
+}
 
 int		create_obj(t_data *p, char *line, int *n)
 {
@@ -66,10 +97,10 @@ int		create_obj(t_data *p, char *line, int *n)
 	if (ft_strequ(tab[0], "sphere"))
 		sphere_init(p, n, tab[1]);
 	/*if (ft_strequ(tab[0], "cylinder"))
-		cylinder(p, n);
+		cylinder(p, n);*/
 	if (ft_strequ(tab[0], "cone"))
-		cone(p, n);
-	if (ft_strequ(tab[0], "plane"))
+		cone_init(p, n, tab[1]);
+	/*if (ft_strequ(tab[0], "plane"))
 		plane(p, n);*/
 	if (ft_strequ(tab[0], "camera"))
 		camera(p, tab);

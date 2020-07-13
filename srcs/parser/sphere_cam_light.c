@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:16:20 by mgalt             #+#    #+#             */
-/*   Updated: 2020/07/11 19:15:02 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/13 16:20:21 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_orb	*new_orb(t_orb new)
 	orb->r = new.r;
 	orb->specular = new.specular;
 	orb->color = new.color;
+	orb->type = new.type;
 	orb->next = NULL;
+	printf("new orb: %d %d %d %f %f %d %d\n", orb->x, orb->y, orb->z, orb->r, orb->specular, orb->color, orb->type);
 	return (orb);
 }
 
@@ -47,7 +49,7 @@ int		sphere_init(t_data *p, int *n, char *line)
 		return (-1);
 	}
 	o1 = orb_init(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]),
-	strtod(tab1[3], NULL), strtod(tab1[4], NULL), ft_atoi(tab1[5]));
+	strtod(tab1[3], NULL), strtod(tab1[4], NULL), ft_atoi(tab1[5]), SPHERE);
     o2 = new_orb(o1);
 	ft_lstadd(&p->figur, ft_lstnew(o2, sizeof(t_orb)));
     free(o2);
@@ -73,6 +75,7 @@ int		set_light(t_data *p, char **tab)
 	if (ft_strequ(tab[0], "light") && ft_strequ(tab[1], "direction"))
 	{
 		p->l_d = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]));
+		//p->l_d = rev_vec(p->l_d);
 		p->intens_d = strtod(tab1[3], NULL);
 	}
 	free_tab(tab1);

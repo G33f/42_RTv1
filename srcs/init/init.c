@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:54:36 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/11 16:22:13 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/13 16:26:42 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_orb	*orb_clon(const t_list *o)
 	orb->r = ((t_orb*)o->content)->r;
 	orb->specular = ((t_orb*)o->content)->specular;
 	orb->color = ((t_orb*)o->content)->color;
+	orb->type = ((t_orb*)o->content)->type;
 	return(orb);
 }
 
