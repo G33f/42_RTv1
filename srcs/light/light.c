@@ -12,8 +12,6 @@
 
 #include "rtv1.h"
 
-
-
 double	light_ambient()
 {
 	double	intens;
@@ -22,70 +20,78 @@ double	light_ambient()
 	return(intens);
 }
 
-double	spec(t_vector n, t_vector l, t_vector v, double s, double i)
-{
-	t_vector	r;
-	double		r_dot_v;
-
-	if (s >= 0)
-	{
-		r = (vec_diff(vec_mult_cst(vec_mult_cst(n, 2), vec_dot(n, l)), l));
-		r_dot_v = vec_dot(r, v);
-		if (r_dot_v > 0)
-			return(i * pow(r_dot_v / (vec_length(r) * vec_length(v)), s));
-		else
-			return(0.0);
-	}
-	else
-		return(0.0);
-}
-
-double	light_point(t_vector p, t_vector n, t_vector v, double s)
+double	light_point(t_data *p, t_3_vec tre, t_light *light, double s)
 {
 	double		intens;
 	t_vector	l;
 	double		n_dot_l;
+	t_t			t;
+	int			check;
 
-	intens = 0.6;
-	l = new_vec(2, -1, 0);
-	l = vec_diff(l, p);
-	n_dot_l = vec_dot(n, l);
-	if (n_dot_l > 0)
-		return((intens * n_dot_l / (vec_length(n) * vec_length(l)) + spec(n, l, v, s, intens)));
+	p->camera.x = p->camera.x;
+	t.t_min = 0.001;
+	t.t_max = 1.0;
+	intens = light->intens;
+	l = new_vec(light->x, light->y, light->z);
+//	print_vec(l);
+	l = vec_diff(l, tre.p);
+//	print_vec(l);
+	check = shadow_render_cy(p, new_vec_3(l ,tre.p, new_vec(0 ,0 , 1)), &t);
+//	printf("check = %d\n", check);
+	n_dot_l = vec_dot(tre.n, l);
+	if (n_dot_l > 0 && check != 1)
+		return((intens * n_dot_l / (vec_length(tre.n) * vec_length(l)) + spec(l, tre, s, intens)));
 	else
 		return(0.0);
 }
 
-double	light_direction(t_vector n, t_vector v, double s)
+double	light_direction(t_data *p, t_3_vec tre, double s)
 {
 	double		intens;
 	t_vector	l;
 	double		n_dot_l;
+	t_t			t;
 
-	intens = 0.2;
+	p->camera.x = p->camera.x;
+	t.t_min = 0.00001;
+	t.t_max = 2147483647.0;
+	intens = 0.0;
 	l = new_vec(1, -4, 4);
-	n_dot_l = vec_dot(n, l);
-	if (n_dot_l > 0)
-		return((intens * n_dot_l / (vec_length(n) * vec_length(l)) + spec(n, l, v, s, intens)));
+	n_dot_l = vec_dot(tre.n, l);
+	if (n_dot_l > 0 && !shadow_render_cy(p, new_vec_3(l ,tre.p, new_vec(0 ,0 , 1)), &t))
+		return((intens * n_dot_l / (vec_length(tre.n) * vec_length(l)) + spec(l, tre, s, intens)));
 	else
 		return(0.0);
 }
 
-double	light_intens(t_vector p, t_vector n, t_vector v, double s)
+double	light_intens(t_data *p ,t_3_vec tre, double s)
 {
-	return (light_direction(n, v, s) + light_point(p, n, v, s) + light_ambient());
+	double	i;
+	t_list	*t;
+	t_light	l;
+
+	t = p->light;
+	i = light_ambient();
+	i += light_direction(p, tre, s);
+	while(t != NULL)
+	{
+		l = light_clon(t);
+		i += light_point(p, tre, &l, s);
+		t = t->next;
+	}
+	return (i);
 }
 
 int get_color(double t, t_data *q, t_vector d, t_orb *o)
 {
-	t_vector	n;
-	t_vector	p;
+	t_3_vec		tre;
 	double		i;
 
-	p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
+	tre.p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
 			vec_mult_cst(d, t));
-	n = vec_diff(p, new_vec(o->x, o->y, o->z));
-	n = vec_divis_cst(n, vec_length(n));
-	i = light_intens(p, n, rev_vec(d),o->specular);
+	tre.n = vec_diff(tre.p, new_vec(o->x, o->y, o->z));
+	tre.n = vec_divis_cst(tre.n, vec_length(tre.n));
+	tre.v = rev_vec(d);
+	i = light_intens(q, tre, o->specular);
 	return(color(o->color, i));
 }

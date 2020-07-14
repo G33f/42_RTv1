@@ -12,19 +12,6 @@
 
 #include "rtv1.h"
 
-t_orb	orb_init(int x, int y, int z, int r, int color, double spec)
-{
-	t_orb orb;
-
-	orb.x = x;
-	orb.y = y;
-	orb.z = z;
-	orb.r = r;
-	orb.color = color;
-	orb.specular = spec;
-	return(orb);
-}
-
 void	init_mlx(t_data *p)
 {
 	int w;
@@ -34,7 +21,7 @@ void	init_mlx(t_data *p)
 	h = WIN_SIZE_Y;
 	if(!(p->mlx.mlx = mlx_init()))
 		error(-13);
-	if(!(p->mlx.win = mlx_new_window(p->mlx.mlx, w, h, "wolf3d")))
+	if(!(p->mlx.win = mlx_new_window(p->mlx.mlx, w, h, "RTv1")))
 		error(-13);
 	if(!(p->img.img = mlx_new_image(p->mlx.mlx, w, h)))
 		error(-13);

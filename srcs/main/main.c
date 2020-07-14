@@ -27,6 +27,30 @@ t_orb	*new_orb(t_orb new)
 	return (orb);
 }
 
+t_light	*new_light(t_light l)
+{
+	t_light	*light;
+
+	light = (t_light*)malloc(sizeof(t_light));
+	light->x = l.x;
+	light->y = l.y;
+	light->z = l.z;
+	light->intens = l.intens;
+	return (light);
+}
+
+void	lights_init(t_data *p)
+{
+	t_light	l1;
+	t_light	l2;
+
+	p->light = NULL;
+	l1 = light_init(5, -1, 0, 0.7);
+	ft_lstadd(&p->light, ft_lstnew(new_light(l1), sizeof(t_light)));
+	l2 = light_init(-5, -1, 0, 0.7);
+	ft_lstadd(&p->light, ft_lstnew(new_light(l2), sizeof(t_light)));
+}
+
 void	figur_init(t_data *p)
 {
 	t_orb	o1;
@@ -53,6 +77,7 @@ void 	print_vec(t_vector v)
 void	test(t_data *p)
 {
 	figur_init(p);
+	lights_init(p);
 	render(p);
 	drow(p);
 }

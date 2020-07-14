@@ -17,6 +17,16 @@ double			vec_length(t_vector a)
 	return(sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
 }
 
+t_3_vec		vec_3_init(t_vector p, t_vector n, t_vector v)
+{
+	t_3_vec	tre;
+
+	tre.p = p;
+	tre.n = n;
+	tre.v = v;
+	return (tre);
+}
+
 t_vector	vec_diff(t_vector a, t_vector b)
 {
 	a.x -= b.x;

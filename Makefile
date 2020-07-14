@@ -35,7 +35,7 @@ LIB_INC			= include/libft.h
 all: $(NAME)
 
 $(NAME): $(LIB_OBJS) $(OBJECTS)
-	gcc $(OBJECTS) -o $@ $(framework)
+	gcc -O2 -O1 -O3 $(OBJECTS) -o $@ $(framework)
 
 VPATH := $(SOURSE_DIRS)
 
