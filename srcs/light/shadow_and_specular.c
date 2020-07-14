@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow_and_specular.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 17:19:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/10 17:19:33 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/14 23:41:53 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,29 @@ t_light	light_clon(const t_list	*light)
 	l.z = ((t_light*)light->content)->z;
 	l.intens = ((t_light*)light->content)->intens;
 	return(l);
+}
+
+int	shadow_ray_tracing_pl(t_3_vec q, t_plane *o, t_t *t)
+{
+	t_vector l0;
+	t_vector l;
+	t_vector	p0l0;
+	t_vector	p0;
+	double		t1;
+	double 		f;
+
+	l = vec_diff(q.p, q.n);
+	l0 = q.n;
+	p0 = new_vec(o->x, o->y, o->z);
+	f = vec_dot(o->n, l);
+	if (f > 0.000001)
+	{
+		p0l0 = vec_diff(l0, p0);
+		t1 = vec_dot(p0l0, o->n);
+		if (t1 < t->t_max && t1 > t->t_min)
+			return (1);
+	}
+	return (0);
 }
 
 int	shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t)
@@ -49,13 +72,23 @@ int	shadow_render_cy(t_data *p, t_3_vec r, t_t *t)
 {
 	t_list *f;
 	t_orb o;
+	t_plane pl;
 
 	f = p->figur;
 	while (f != NULL)
 	{
-		o = orb_clon(f);
-		if (shadow_ray_tracing(r, &o, t))
-			return (1);
+		if (((t_orb*)f->content)->type == SPHERE)
+		{
+			o = orb_clon(f);
+			if (shadow_ray_tracing(r, &o, t))
+				return (1);
+		}
+		if (((t_plane*)f->content)->type == PLANE)
+		{
+			pl = plane_clon(f);
+			if (shadow_ray_tracing_pl(r, &pl, t))
+				return (1);
+		}
 		f = f->next;
 	}
 	return (0);

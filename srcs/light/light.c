@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 07:32:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/14 16:52:53 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/14 22:47:27 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,20 @@ double	light_intens(t_data *p ,t_3_vec tre, double s)
 		t = t->next;
 	}
 	return (i);
+}
+
+int get_color_pl(double t, t_data *q, t_vector d, t_plane *o)
+{
+	t_3_vec		tre;
+	double		i;
+
+	tre.p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
+			vec_mult_cst(d, t));
+	tre.n = vec_diff(tre.p, new_vec(o->x, o->y, o->z));
+	tre.n = vec_divis_cst(tre.n, vec_length(tre.n));
+	tre.v = rev_vec(d);
+	i = light_intens(q, tre, 500);
+	return(color(o->color, i));
 }
 
 int get_color(double t, t_data *q, t_vector d, t_orb *o)

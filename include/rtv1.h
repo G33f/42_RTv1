@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/14 16:53:53 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/14 23:31:56 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <pthread.h>
 # define SPHERE 1
 # define CYLINDRE 2
 # define CONE 3
@@ -35,6 +36,8 @@
 # define YELLOW 16776960
 # define WIN_SIZE_X	1024
 # define WIN_SIZE_Y	960
+//# define THREADS 32
+//# define THREAD_WIDTH 32
 
 typedef struct		s_obj
 {
@@ -101,6 +104,17 @@ typedef struct		s_3_vec
 
 }					t_3_vec;
 
+typedef struct		s_plane
+{
+	int				x;
+	int				y;
+	int				z;
+	t_vector		n;
+	int				color;
+	int				type;
+	struct s_plane	*next;	
+}					t_plane;
+
 typedef struct		s_camera
 {
 	double			x;
@@ -147,6 +161,10 @@ typedef struct		s_data
 	t_list			*figur;
 	t_list			*light;
 	t_l				l;
+	int				x;
+	int				y;
+	int				max_x;
+	int				max_y;
 	int				obj_n;
 	int				fd;
 	int				line_nbr;
@@ -210,5 +228,8 @@ int					sphere_init(t_data *p, int *n, char *line);
 double				min(double a, double b, t_t *t);
 int					len_tab(char **tab);
 double  			ft_strtodbl(char *s);
+void				create_thread(t_data *p);
+int 				get_color_pl(double t, t_data *q, t_vector d, t_plane *o);
+t_plane				plane_clon(const t_list *o);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/14 16:42:09 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/14 23:19:39 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,50 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
 	return (0);
 }
 
+int	ray_tracing_pl(t_data *p, t_vector r, t_plane *o, t_t *b)
+{
+	t_vector	l0;
+	//t_vector	oc;
+	t_vector	l;
+	t_vector	p0l0;
+	t_vector	p0;
+	double		t;
+	double f;
+
+	b->t_max = 0;
+	//l = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
+	l0 = new_vec(p->camera.x, p->camera.y, p->camera.z);
+	l = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
+	//oc = vec_diff(l0, new_vec(o->x, o->y, o->z));
+	p0 = new_vec(o->x, o->y, o->z);
+	f = vec_dot(o->n, l);
+	if (f > 0.000001)
+	{
+		p0l0 = vec_diff(l0, p0);
+		t = vec_dot(p0l0, o->n);
+		if (t > 0)
+			return (get_color_pl(t, p, l, o));
+	}
+	return (0);
+}
+
+t_plane	plane_clon(const t_list *o)
+{
+	t_plane	p;
+
+	p.x = ((t_plane*)o->content)->x;
+	p.y = ((t_plane*)o->content)->y;
+	p.z = ((t_plane*)o->content)->z;
+	p.n = ((t_plane*)o->content)->n;
+	p.color = ((t_plane*)o->content)->color;
+	return(p);
+}
+
 void	render_cy(t_data *p, t_vector r, int j)
 {
 	t_list	*f;
 	t_orb	o;
+	t_plane pl;
 	int		color;
 	int		buf;
 	t_t	t;
@@ -61,12 +101,30 @@ void	render_cy(t_data *p, t_vector r, int j)
 	t.t_max = 2147483647;
 	while(f != NULL)
 	{
+		/*if (((t_plane*)f->content)->type == PLANE)
+		{
+			pl = plane_clon(f);
+			buf = ray_tracing_pl(p, new_vec(r.x, r.y, p->camera.canv_d), &pl, &t);
+			if (buf > 0)
+				color = buf;
+			//p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
+		}*/
 		if (((t_orb*)f->content)->type == SPHERE)
 		{
+			//ft_putstr("sphere\n");
 			o = orb_clon(f);
 			buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), &o, &t);
 			if (buf > 0)
 				color = buf;
+			//p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
+		}
+		if (((t_plane*)f->content)->type == PLANE)
+		{
+			pl = plane_clon(f);
+			buf = ray_tracing_pl(p, new_vec(r.x, r.y, p->camera.canv_d), &pl, &t);
+			if (buf > 0)
+				color = buf;
+			//p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
 		}
 		f = f->next;
 	}
