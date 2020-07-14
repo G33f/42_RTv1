@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:06:23 by mgalt             #+#    #+#             */
-/*   Updated: 2020/07/13 16:24:30 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/14 16:56:12 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		object_num(char *file)
 	return (n);
 }
 
-int		cone_init(t_data *p, int *n, char *line)
+/*int		cone_init(t_data *p, int *n, char *line)
 {
 	t_orb	o1;
     t_orb   *o2;
@@ -86,7 +86,7 @@ int		cone_init(t_data *p, int *n, char *line)
     free(o2);
 	free_tab(tab1);
 	return (0);
-}
+}*/
 
 int		create_obj(t_data *p, char *line, int *n)
 {
@@ -98,8 +98,8 @@ int		create_obj(t_data *p, char *line, int *n)
 		sphere_init(p, n, tab[1]);
 	/*if (ft_strequ(tab[0], "cylinder"))
 		cylinder(p, n);*/
-	if (ft_strequ(tab[0], "cone"))
-		cone_init(p, n, tab[1]);
+	//if (ft_strequ(tab[0], "cone"))
+	//	cone_init(p, n, tab[1]);
 	/*if (ft_strequ(tab[0], "plane"))
 		plane(p, n);*/
 	if (ft_strequ(tab[0], "camera"))
@@ -107,7 +107,9 @@ int		create_obj(t_data *p, char *line, int *n)
 	if (ft_strequ(tab[0], "light"))
 		set_light(p, tab);
 	if (ft_strequ(tab[0], "ambient"))
-		p->ambient = strtod(tab[1], NULL);
+		p->l.ambient = ft_strtodbl(tab[1]);
+	if (ft_strequ(tab[0], "shadows"))
+		p->l.shadows = ft_atoi(tab[1]);
     free_tab(tab);
 	return (0);
 }
@@ -121,6 +123,7 @@ int		read_file(t_data *p, char *file)
 	i = 0;
 	p->obj_n = object_num(file);
 	p->figur = NULL;
+	p->light = NULL;
 	n = -1;
 	if (!p->obj_n)
 	{

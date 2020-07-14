@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/13 16:02:03 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/14 16:53:53 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@
 # define PLANE 4
 # define LIGHT 5
 # define CAMERA 6
-# define	WIN_SIZE_X	1024
-# define	WIN_SIZE_Y	960
+# define RED 16711680
+# define GREEN 65280
+# define BLUE 255
+# define YELLOW 16776960
+# define WIN_SIZE_X	1024
+# define WIN_SIZE_Y	960
 
 typedef struct		s_obj
 {
@@ -41,6 +45,20 @@ typedef struct		s_obj
 	int				color;
 	int				type;
 }					t_obj;
+
+typedef	struct		s_t
+{
+	double			t_min;
+	double			t_max;
+}					t_t;
+
+typedef struct		s_light
+{
+	double			x;
+	double			y;
+	double			z;
+	double			intens;
+}					t_light;
 
 typedef struct 		s_cone
 {
@@ -75,6 +93,14 @@ typedef struct		s_vector
 	double			z;
 }					t_vector;
 
+typedef struct		s_3_vec
+{
+	t_vector		p;
+	t_vector		n;
+	t_vector		v;
+
+}					t_3_vec;
+
 typedef struct		s_camera
 {
 	double			x;
@@ -100,6 +126,17 @@ typedef struct		s_mlx
 	void			*mlx;
 }					t_mlx;
 
+typedef struct 		s_l
+{
+	t_vector		l_d;
+	double			intens_p;
+	double			intens_d;
+	double			ambient;
+	double			specular;
+	int				shadows;
+}					t_l;
+
+
 typedef struct		s_data
 {
 	t_img			img;
@@ -107,16 +144,12 @@ typedef struct		s_data
 	t_img			canv;
 	t_camera		camera;
 	t_obj			*obj;
-	t_vector		l_p;
-	t_vector		l_d;
 	t_list			*figur;
-	double			intens_p;
-	double			intens_d;
+	t_list			*light;
+	t_l				l;
 	int				obj_n;
 	int				fd;
 	int				line_nbr;
-	double			ambient;
-	double			specular;
 }					t_data;
 
 ////init------------------------------------------
@@ -124,12 +157,12 @@ int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
 ////init figures----------------------------------
-t_orb				orb_init(int x, int y, int z, int r, int color, double spec, int type);
-t_orb				*orb_clon(const t_list *o);
+t_orb				orb_init(int x, int y, int z, int r, char *color, double spec, int type);
+t_orb				orb_clon(const t_list *o);
 t_orb				*new_orb(t_orb new);
 ////render----------------------------------------
 int					render(t_data *p);
-int					ray_tracing(t_data *p, t_vector r, t_orb *o, double *t);
+int					ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t);
 int					drow(t_data *p);
 ////vector---------------------------------------
 t_vector			vec_mult_cst(t_vector a, double t);
@@ -141,11 +174,19 @@ double				vec_dot(t_vector a, t_vector b);
 double				vec_length(t_vector a);
 t_vector			vec_divis_cst(t_vector a, double t);
 t_vector			rev_vec(t_vector a);
+t_3_vec				new_vec_3(t_vector a, t_vector b, t_vector c);
 ////light-----------------------------------------
 double				light_ambient();
-double				light_point(t_vector p, t_vector n, t_vector v, double s, t_data *q);
-double				light_direction(t_vector n, t_vector v, double s, t_data *q);
-double				light_intens(t_vector p, t_vector n, t_vector v, double s, t_data *q);
+double				light_point(t_data *p, t_3_vec tre, t_light *light, double s);
+double				light_direction(t_data *p, t_3_vec tre, double s);
+double				light_intens(t_data *p ,t_3_vec tre, double s);
+t_light				light_clon(const t_list	*light);
+double				spec(t_vector l, t_3_vec tre, double s, double i);
+int					shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t);
+int					shadow_render_cy(t_data *p, t_3_vec r, t_t *t);
+//double				light_point(t_vector p, t_vector n, t_vector v, double s, t_data *q);
+//double				light_direction(t_vector n, t_vector v, double s, t_data *q);
+//double				light_intens(t_vector p, t_vector n, t_vector v, double s, t_data *q);
 int					color(int color, double i);
 int					get_color(double t, t_data *q, t_vector d, t_orb *o);
 ////error-----------------------------------------
@@ -165,10 +206,9 @@ void				free_tab(char **tab);
 int					set_light(t_data *p, char **tab);
 int					camera(t_data *p, char **tab);
 int					sphere_init(t_data *p, int *n, char *line);
-////keys------------------------------------------
-int					key_press(int key, t_data *p);
-int					escape(void);
-double	min(double a, double b);
+
+double				min(double a, double b, t_t *t);
 int					len_tab(char **tab);
+double  			ft_strtodbl(char *s);
 
 #endif
