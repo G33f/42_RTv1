@@ -6,24 +6,13 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 17:19:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/14 23:41:53 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/17 00:08:48 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_light	light_clon(const t_list	*light)
-{
-	t_light l;
-
-	l.x = ((t_light*)light->content)->x;
-	l.y = ((t_light*)light->content)->y;
-	l.z = ((t_light*)light->content)->z;
-	l.intens = ((t_light*)light->content)->intens;
-	return(l);
-}
-
-int	shadow_ray_tracing_pl(t_3_vec q, t_plane *o, t_t *t)
+/*int	shadow_ray_tracing_pl(t_3_vec q, t_plane *o, t_t *t)
 {
 	t_vector l0;
 	t_vector l;
@@ -44,9 +33,20 @@ int	shadow_ray_tracing_pl(t_3_vec q, t_plane *o, t_t *t)
 			return (1);
 	}
 	return (0);
+}*/
+
+t_light	light_clon(const t_list	*light)
+{
+	t_light l;
+
+	l.x = ((t_light*)light->content)->x;
+	l.y = ((t_light*)light->content)->y;
+	l.z = ((t_light*)light->content)->z;
+	l.intens = ((t_light*)light->content)->intens;
+	return(l);
 }
 
-int	shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t)
+int	shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t)
 {
 	t_vector	d;
 	t_vector	oc;
@@ -55,11 +55,22 @@ int	shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t)
 	double		t2;
 
 	d = vec_diff(q.p, q.n);
-	oc = vec_diff(q.n, new_vec(o->x, o->y, o->z));
-	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
-			(vec_dot(oc, oc) - pow(o->r, 2)));
-	if (disk <= 0)
+	d = vec_divis_cst(d, vec_length(d));
+	oc = vec_diff(q.n, o->c);
+	disk = f_disk(d, oc, o);
+	if (disk <= 0 && o->type != PLANE)
 		return (0);
+	else if (o->type == PLANE)
+	{
+		if (vec_dot(d, o->v) > 0.000001)
+		{
+			t1 = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
+			if (t1 < t->t_max && t1 > t->t_min)
+				return (1);
+		}
+		else
+			return (0);
+	}
 	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
 	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
 	t1 = min(t1, t2, t);
@@ -71,24 +82,14 @@ int	shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t)
 int	shadow_render_cy(t_data *p, t_3_vec r, t_t *t)
 {
 	t_list *f;
-	t_orb o;
-	t_plane pl;
+	t_obj o;
 
 	f = p->figur;
 	while (f != NULL)
 	{
-		if (((t_orb*)f->content)->type == SPHERE)
-		{
-			o = orb_clon(f);
-			if (shadow_ray_tracing(r, &o, t))
-				return (1);
-		}
-		if (((t_plane*)f->content)->type == PLANE)
-		{
-			pl = plane_clon(f);
-			if (shadow_ray_tracing_pl(r, &pl, t))
-				return (1);
-		}
+		o = obj_clon(f);
+		if (shadow_ray_tracing(r, &o, t))
+			return (1);
 		f = f->next;
 	}
 	return (0);

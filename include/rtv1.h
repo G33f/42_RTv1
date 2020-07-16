@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/14 23:31:56 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/16 23:57:06 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # define SPHERE 1
-# define CYLINDRE 2
+# define CYLINDER 2
 # define CONE 3
 # define PLANE 4
 # define LIGHT 5
@@ -34,12 +34,13 @@
 # define GREEN 65280
 # define BLUE 255
 # define YELLOW 16776960
-# define WIN_SIZE_X	1024
+# define AQUA 61680
+# define WIN_SIZE_X	960
 # define WIN_SIZE_Y	960
 //# define THREADS 32
 //# define THREAD_WIDTH 32
 
-typedef struct		s_obj
+/*typedef struct		s_obj
 {
 	int				x;
 	int				y;
@@ -47,7 +48,8 @@ typedef struct		s_obj
 	double			r;
 	int				color;
 	int				type;
-}					t_obj;
+}					t_obj;*/
+
 
 typedef	struct		s_t
 {
@@ -96,6 +98,17 @@ typedef struct		s_vector
 	double			z;
 }					t_vector;
 
+typedef struct		s_obj
+{
+	t_vector		c;
+	t_vector		v;
+	double			a;
+	double			r;
+	double			specular;
+	int				color;
+	int				type;
+}					t_obj;
+
 typedef struct		s_3_vec
 {
 	t_vector		p;
@@ -109,6 +122,7 @@ typedef struct		s_plane
 	int				x;
 	int				y;
 	int				z;
+	int				d;
 	t_vector		n;
 	int				color;
 	int				type;
@@ -157,7 +171,7 @@ typedef struct		s_data
 	t_mlx			mlx;
 	t_img			canv;
 	t_camera		camera;
-	t_obj			*obj;
+	//t_obj			*obj;
 	t_list			*figur;
 	t_list			*light;
 	t_l				l;
@@ -175,12 +189,15 @@ int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
 ////init figures----------------------------------
-t_orb				orb_init(int x, int y, int z, int r, char *color, double spec, int type);
-t_orb				orb_clon(const t_list *o);
-t_orb				*new_orb(t_orb new);
+t_obj				obj_init1(t_vector c, t_vector v, double a, double r);
+t_obj				obj_init2(t_obj obj, double specular, char *color, int type);
+t_obj				obj_clon(const t_list *o);
+t_obj				*new_obj(t_obj new);
+int					figur_init(t_data *p, char *type, char *line);
 ////render----------------------------------------
 int					render(t_data *p);
-int					ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t);
+void				render_cy(t_data *p, t_vector r, int j);
+int					ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t);
 int					drow(t_data *p);
 ////vector---------------------------------------
 t_vector			vec_mult_cst(t_vector a, double t);
@@ -198,25 +215,30 @@ double				light_ambient();
 double				light_point(t_data *p, t_3_vec tre, t_light *light, double s);
 double				light_direction(t_data *p, t_3_vec tre, double s);
 double				light_intens(t_data *p ,t_3_vec tre, double s);
+double				spec(t_vector l, t_3_vec tre, double s, double i);
+int					color(int color, double i);
+int					get_color(double t, t_data *q, t_vector d, t_obj *o);
 t_light				light_clon(const t_list	*light);
 double				spec(t_vector l, t_3_vec tre, double s, double i);
-int					shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t);
+int					shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t);
 int					shadow_render_cy(t_data *p, t_3_vec r, t_t *t);
-//double				light_point(t_vector p, t_vector n, t_vector v, double s, t_data *q);
-//double				light_direction(t_vector n, t_vector v, double s, t_data *q);
-//double				light_intens(t_vector p, t_vector n, t_vector v, double s, t_data *q);
-int					color(int color, double i);
-int					get_color(double t, t_data *q, t_vector d, t_orb *o);
 ////error-----------------------------------------
 void				usage(int cod);
 void				error(int cod);
 void				error_log(int cod);
-
+////disc------------------------------------------
+double				disk_sphere(t_vector d, t_vector oc, t_obj *figur);
+double				disk_cone(t_vector d, t_vector oc, t_obj *figur);
+double				f_disk(t_vector d, t_vector oc, t_obj *figur);
+////norm------------------------------------------
+t_vector			norm_sphere(t_obj *fig, t_vector p);
+t_vector			norm_cone(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig);
+t_vector			normals(t_data *q, t_obj *fig, t_vector p, t_vector d, double t);
 ////keys------------------------------------------
 int					key_press(int key, t_data *p);
 int					escape(void);
 ////parsing---------------------------------------
-int					create_obj(t_data *p, char *line, int *n);
+int					create_obj(t_data *p, char *line);
 int					read_file(t_data *p, char *file);
 int					object_num(char *file);
 int					len_tab(char **tab);
@@ -229,7 +251,7 @@ double				min(double a, double b, t_t *t);
 int					len_tab(char **tab);
 double  			ft_strtodbl(char *s);
 void				create_thread(t_data *p);
-int 				get_color_pl(double t, t_data *q, t_vector d, t_plane *o);
+int 				get_color_pl(double t, t_data *q, t_vector d, t_vector l0, t_plane *o);
 t_plane				plane_clon(const t_list *o);
 
 #endif

@@ -6,13 +6,13 @@
 #    By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/27 10:34:56 by wpoudre           #+#    #+#              #
-#    Updated: 2020/07/13 18:27:08 by mgalt            ###   ########.fr        #
+#    Updated: 2020/07/16 19:35:15 by mgalt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= RTv1
 
-SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors srcs/light srcs/parser srcs/utils
+SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors srcs/light srcs/parser srcs/utils srcs/figur
 
 FLAGS			= -Wall -Werror -Wextra
 

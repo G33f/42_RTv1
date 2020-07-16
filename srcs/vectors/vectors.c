@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 01:05:33 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/04 01:05:37 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/15 15:16:58 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ t_vector	new_vec(double x, double y, double z)
 {
 	t_vector vec;
 
+	//ft_putstr("in new vec\n");
 	vec.x = x;
 	vec.y = y;
 	vec.z = z;
+	//printf("%f %f %f\n", vec.x, vec.y, vec.z);
 	return(vec);
 }

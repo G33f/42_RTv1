@@ -6,11 +6,32 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 18:24:41 by mgalt             #+#    #+#             */
-/*   Updated: 2020/07/14 16:34:42 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/16 20:09:00 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
+	tab = NULL;
+}
+
+int		len_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i] != 0)
+		i++;
+	return (i);
+}
 
 double  ft_strtodbl(char *s)
 {

@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/14 23:19:39 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/17 00:20:34 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ double	min(double a, double b, t_t *t)
 		return (a);
 	else if (b > t->t_min && b < t->t_max)
 		return (b);
+	/*else if (a > b && b < t->t_min && a < t->t_max && a > t->t_min)
+		return (a);*/
 	return (0.0);
 }
 
-int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
+/*int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
 {
 	t_vector	d;
 	t_vector	oc;
@@ -45,19 +47,20 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
 		return (get_color(t1, p, d, o));
 	}
 	return (0);
-}
+}*/
 
-int	ray_tracing_pl(t_data *p, t_vector r, t_plane *o, t_t *b)
+/*int	ray_tracing_pl(t_data *p, t_vector r, t_plane *o, t_t *b)
 {
 	t_vector	l0;
 	//t_vector	oc;
 	t_vector	l;
 	t_vector	p0l0;
 	t_vector	p0;
+	//t_vector	p1;
 	double		t;
 	double f;
 
-	b->t_max = 0;
+	b->t_max = b->t_max;
 	//l = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
 	l0 = new_vec(p->camera.x, p->camera.y, p->camera.z);
 	l = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
@@ -68,8 +71,11 @@ int	ray_tracing_pl(t_data *p, t_vector r, t_plane *o, t_t *b)
 	{
 		p0l0 = vec_diff(l0, p0);
 		t = vec_dot(p0l0, o->n);
-		if (t > 0)
-			return (get_color_pl(t, p, l, o));
+		if (t >= 0)
+		{
+			//p1 = vec_sum(vec_mult_cst(l, t), l0);
+			return (get_color_pl(t, p, l, l0, o));
+		}
 	}
 	return (0);
 }
@@ -84,16 +90,53 @@ t_plane	plane_clon(const t_list *o)
 	p.n = ((t_plane*)o->content)->n;
 	p.color = ((t_plane*)o->content)->color;
 	return(p);
+}*/
+
+int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
+{
+	t_vector	d;
+	t_vector	oc;
+	double		disk;
+	double		t1;
+	double		t2;
+
+	r = vec_divis_cst(r, vec_length(r));
+	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
+	d = vec_divis_cst(d, vec_length(d));
+	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
+	disk = f_disk(d, oc, o);
+	if (disk <= 0 && o->type != PLANE)
+		return (0);
+	else if (o->type == PLANE)
+	{
+		//t1 = rt_plane(p, r, d, oc);
+		if (vec_dot(d, o->v) > 0.000001)
+		{
+			t1 = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
+			if (t1 < t->t_max && t1 > t->t_min)
+				return (get_color(t1, p, d, o));
+		}
+		else
+			return (0);
+	}
+	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
+	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
+	t1 = min(t1, t2, t);
+	if (t1 < t->t_max && t1 > t->t_min)
+	{
+		t->t_max = t1;
+		return (get_color(t1, p, d, o));
+	}
+	return (0);
 }
 
 void	render_cy(t_data *p, t_vector r, int j)
 {
 	t_list	*f;
-	t_orb	o;
-	t_plane pl;
+	t_obj	o;
 	int		color;
 	int		buf;
-	t_t	t;
+	t_t		t;
 
 	f = p->figur;
 	color = 0;
@@ -101,31 +144,10 @@ void	render_cy(t_data *p, t_vector r, int j)
 	t.t_max = 2147483647;
 	while(f != NULL)
 	{
-		/*if (((t_plane*)f->content)->type == PLANE)
-		{
-			pl = plane_clon(f);
-			buf = ray_tracing_pl(p, new_vec(r.x, r.y, p->camera.canv_d), &pl, &t);
-			if (buf > 0)
-				color = buf;
-			//p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
-		}*/
-		if (((t_orb*)f->content)->type == SPHERE)
-		{
-			//ft_putstr("sphere\n");
-			o = orb_clon(f);
-			buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), &o, &t);
-			if (buf > 0)
-				color = buf;
-			//p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
-		}
-		if (((t_plane*)f->content)->type == PLANE)
-		{
-			pl = plane_clon(f);
-			buf = ray_tracing_pl(p, new_vec(r.x, r.y, p->camera.canv_d), &pl, &t);
-			if (buf > 0)
-				color = buf;
-			//p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
-		}
+		o = obj_clon(f);
+		buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), &o, &t);
+		if (buf > 0)
+			color = buf;
 		f = f->next;
 	}
 	p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;

@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 07:32:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/14 22:47:27 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/16 23:45:59 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ double	light_point(t_data *p, t_3_vec tre, t_light *light, double s)
 	int			check;
 
 	p->camera.x = p->camera.x;
-	t.t_min = 0.0000001;
+	t.t_min = 0.000001;
 	t.t_max = 1.0;
 	intens = light->intens;
 	l = new_vec(light->x, light->y, light->z);
 	l = vec_diff(l, tre.p);
+	//check = 0;
 	check = shadow_render_cy(p, new_vec_3(l ,tre.p, new_vec(0 ,0 , 1)), &t);
 	n_dot_l = vec_dot(tre.n, l);
 	if (n_dot_l > 0 && check != 1)
@@ -69,20 +70,21 @@ double	light_intens(t_data *p ,t_3_vec tre, double s)
 	return (i);
 }
 
-int get_color_pl(double t, t_data *q, t_vector d, t_plane *o)
+/*int get_color_pl(double t, t_data *q, t_vector d, t_vector l0, t_plane *o)
 {
 	t_3_vec		tre;
 	double		i;
 
 	tre.p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
 			vec_mult_cst(d, t));
-	tre.n = vec_diff(tre.p, new_vec(o->x, o->y, o->z));
-	tre.n = vec_divis_cst(tre.n, vec_length(tre.n));
+	tre.p = vec_sum(vec_mult_cst(d, t), l0);
+	//tre.n = vec_diff(tre.p, new_vec(o->x, o->y, o->z));
+	tre.n = o->n;
+	//tre.n = vec_divis_cst(tre.n, vec_length(tre.n));
 	tre.v = rev_vec(d);
 	i = light_intens(q, tre, 500);
 	return(color(o->color, i));
 }
-
 int get_color(double t, t_data *q, t_vector d, t_orb *o)
 {
 	t_3_vec		tre;
@@ -90,9 +92,23 @@ int get_color(double t, t_data *q, t_vector d, t_orb *o)
 
 	tre.p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
 			vec_mult_cst(d, t));
+	//tre.p = vec_sum(vec_mult_cst(d, t), l0);
 	tre.n = vec_diff(tre.p, new_vec(o->x, o->y, o->z));
 	tre.n = vec_divis_cst(tre.n, vec_length(tre.n));
 	tre.v = rev_vec(d);
+	i = light_intens(q, tre, o->specular);
+	return(color(o->color, i));
+}*/
+
+int get_color(double t, t_data *q, t_vector d, t_obj *o)
+{
+	t_3_vec		tre;
+	double		i;
+
+	tre.p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
+			vec_mult_cst(d, t));
+	tre.n = normals(q, o, tre.p, d, t);
+	tre.v = rev_vec(d);// o->v;
 	i = light_intens(q, tre, o->specular);
 	return(color(o->color, i));
 }
