@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-double			vec_length(t_vector a)
+double		vec_length(t_vector a)
 {
 	return(sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
 }

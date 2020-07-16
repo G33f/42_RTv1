@@ -12,7 +12,7 @@
 
 NAME			= RTv1
 
-SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors srcs/light
+SOURSE_DIRS		:= srcs srcs/error srcs/init srcs/main srcs/render srcs/vectors srcs/light srcs/figur
 
 FLAGS			= -Wall -Werror -Wextra
 

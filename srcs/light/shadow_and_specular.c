@@ -23,7 +23,7 @@ t_light	light_clon(const t_list	*light)
 	return(l);
 }
 
-int	shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t)
+int	shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t)
 {
 	t_vector	d;
 	t_vector	oc;
@@ -32,9 +32,8 @@ int	shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t)
 	double		t2;
 
 	d = vec_diff(q.p, q.n);
-	oc = vec_diff(q.n, new_vec(o->x, o->y, o->z));
-	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
-			(vec_dot(oc, oc) - pow(o->r, 2)));
+	oc = vec_diff(q.n, o->c);
+	disk = f_disk(d, oc, o);
 	if (disk <= 0)
 		return (0);
 	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
@@ -48,12 +47,12 @@ int	shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t)
 int	shadow_render_cy(t_data *p, t_3_vec r, t_t *t)
 {
 	t_list *f;
-	t_orb o;
+	t_obj o;
 
 	f = p->figur;
 	while (f != NULL)
 	{
-		o = orb_clon(f);
+		o = obj_clon(f);
 		if (shadow_ray_tracing(r, &o, t))
 			return (1);
 		f = f->next;

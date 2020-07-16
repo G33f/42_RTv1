@@ -12,17 +12,18 @@
 
 #include "rtv1.h"
 
-t_orb	orb_clon(const t_list *o)
+t_obj	obj_clon(const t_list *o)
 {
-	t_orb orb;
+	t_obj	obj;
 
-	orb.x = ((t_orb*)o->content)->x;
-	orb.y = ((t_orb*)o->content)->y;
-	orb.z = ((t_orb*)o->content)->z;
-	orb.r = ((t_orb*)o->content)->r;
-	orb.specular = ((t_orb*)o->content)->specular;
-	orb.color = ((t_orb*)o->content)->color;
-	return(orb);
+	obj.c = ((t_obj*)o->content)->c;
+	obj.v = ((t_obj*)o->content)->v;
+	obj.a = ((t_obj*)o->content)->a;
+	obj.r = ((t_obj*)o->content)->r;
+	obj.specular = ((t_obj*)o->content)->specular;
+	obj.color = ((t_obj*)o->content)->color;
+	obj.type = ((t_obj*)o->content)->type;
+	return(obj);
 }
 
 int camera_init(t_data *p)

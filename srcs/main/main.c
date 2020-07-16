@@ -12,19 +12,19 @@
 
 #include "rtv1.h"
 
-t_orb	*new_orb(t_orb new)
+t_obj	*new_obj(t_obj new)
 {
-	t_orb	*orb;
+	t_obj	*obj;
 
-	orb = (t_orb*)malloc(sizeof(t_orb));
-	orb->x = new.x;
-	orb->y = new.y;
-	orb->z = new.z;
-	orb->r = new.r;
-	orb->specular = new.specular;
-	orb->color = new.color;
-	orb->next = NULL;
-	return (orb);
+	obj = (t_obj*)malloc(sizeof(t_obj));
+	obj->c = new.c;
+	obj->v = new.v;
+	obj->a = new.a;
+	obj->r = new.r;
+	obj->specular = new.specular;
+	obj->color = new.color;
+	obj->type = new.type;
+	return (obj);
 }
 
 t_light	*new_light(t_light l)
@@ -53,20 +53,23 @@ void	lights_init(t_data *p)
 
 void	figur_init(t_data *p)
 {
-	t_orb	o1;
-	t_orb	o2;
-	t_orb	o3;
-	t_orb	o4;
+	t_obj	o1;
+	t_obj	o2;
+	t_obj	o3;
+	t_obj	o4;
+	t_obj	o5;
 
 	p->figur = NULL;
-	o1 = orb_init(0, 1, 3, 1, 0xFF0000, 500);
-	ft_lstadd(&p->figur, ft_lstnew(new_orb(o1), sizeof(t_orb)));
-	o2 = orb_init(2, 0, 4, 1, 0x0000FF, 500);
-	ft_lstadd(&p->figur, ft_lstnew(new_orb(o2), sizeof(t_orb)));
-	o3 = orb_init(-2, 0, 4, 1, 0x00FF00, 10);
-	ft_lstadd(&p->figur, ft_lstnew(new_orb(o3), sizeof(t_orb)));
-	o4 = orb_init(0, 5001, 0, 5000, 0xFFFF00, 1000);
-	ft_lstadd(&p->figur, ft_lstnew(new_orb(o4), sizeof(t_orb)));
+	o5 = obj_init(new_vec(0, 0, 2), new_vec(0, 1, 0), 3, 0, 300, 0xF0F000, CONE);
+	ft_lstadd(&p->figur, ft_lstnew(new_obj(o5), sizeof(t_obj)));
+	o1 = obj_init(new_vec(0, 1, 3), new_vec(0, 0, 0), 0, 1, 500, 0xFF0000, SPHERE);
+	ft_lstadd(&p->figur, ft_lstnew(new_obj(o1), sizeof(t_obj)));
+	o2 = obj_init(new_vec(2, 0, 4), new_vec(0, 0, 0), 0, 1, 500, 0x0000FF, SPHERE);
+	ft_lstadd(&p->figur, ft_lstnew(new_obj(o2), sizeof(t_obj)));
+	o3 = obj_init(new_vec(-2, 0, 4), new_vec(0, 0, 0), 0, 1, 10, 0x00FF00, SPHERE);
+	ft_lstadd(&p->figur, ft_lstnew(new_obj(o3), sizeof(t_obj)));
+	o4 = obj_init(new_vec(0, 5001, 0), new_vec(0, 0, 0), 0, 5000, 1000, 0xFFFF00, SPHERE);
+	ft_lstadd(&p->figur, ft_lstnew(new_obj(o4), sizeof(t_obj)));
 }
 
 void 	print_vec(t_vector v)

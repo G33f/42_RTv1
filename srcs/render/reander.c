@@ -21,7 +21,7 @@ double	min(double a, double b, t_t *t)
 	return (0.0);
 }
 
-int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
+int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 {
 	t_vector	d;
 	t_vector	oc;
@@ -30,10 +30,8 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
 	double		t2;
 
 	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
-	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z),
-			new_vec(o->x, o->y, o->z));
-	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
-			(vec_dot(oc, oc) - pow(o->r, 2)));
+	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
+	disk = f_disk(d, oc, o);
 	if (disk <= 0)
 		return (0);
 	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
@@ -50,7 +48,7 @@ int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
 void	render_cy(t_data *p, t_vector r, int j)
 {
 	t_list	*f;
-	t_orb	o;
+	t_obj	o;
 	int		color;
 	int		buf;
 	t_t		t;
@@ -61,7 +59,7 @@ void	render_cy(t_data *p, t_vector r, int j)
 	t.t_max = 2147483647;
 	while(f != NULL)
 	{
-		o = orb_clon(f);
+		o = obj_clon(f);
 		buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), &o, &t);
 		if (buf > 0)
 			color = buf;

@@ -15,14 +15,23 @@
 # define RTV1_H
 
 # include <math.h>
-#include <stdio.h>
+# include <stdio.h>
 # include "libft.h"
 # include "mlx.h"
 
-# define	WIN_SIZE_X	960
-# define	WIN_SIZE_Y	960
+# define SPHERE		1
+# define CYLINDRE	2
+# define CONE		3
+# define PLANE 		4
+# define WIN_SIZE_X	960
+# define WIN_SIZE_Y	960
 
-
+typedef struct		s_vector
+{
+	double			x;
+	double			y;
+	double			z;
+}					t_vector;
 
 typedef	struct		s_t
 {
@@ -38,37 +47,22 @@ typedef struct		s_light
 	double			intens;
 }					t_light;
 
-typedef struct		s_orb
+typedef struct		s_obj
 {
-	int				x;
-	int				y;
-	int				z;
+	t_vector		c;
+	t_vector		v;
+	double			a;
 	double			r;
 	double			specular;
 	int				color;
-	struct s_orb	*next;
-}					t_orb;
-
-typedef struct		s_vector
-{
-	double			x;
-	double			y;
-	double			z;
-}					t_vector;
-
-typedef struct		s_res
-{
-	t_orb			o;
-	t_vector		d;
-	double			t;
-}					t_res;
+	int				type;
+}					t_obj;
 
 typedef struct		s_3_vec
 {
 	t_vector		p;
 	t_vector		n;
 	t_vector		v;
-
 }					t_3_vec;
 
 typedef struct		s_camera
@@ -110,16 +104,18 @@ typedef struct		s_data
 int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
-t_orb				*new_orb(t_orb new);
+t_obj				*new_obj(t_obj new);
 void				figur_init(t_data *p);
 ////init figures and light------------------------
-t_orb				orb_init(int x, int y, int z, int r, int color, double spec);
-t_orb				orb_clon(const t_list *o);
-t_light				light_init(	double x, double y, double z, double intens);
+t_obj				obj_init(t_vector c, t_vector v, double a, double r,
+		double specular, int color, int type);
+t_obj				obj_clon(const t_list *o);
+t_light				light_init(double x, double y, double z,
+								  double intens);
 ////render----------------------------------------
 int					render(t_data *p);
 void				render_cy(t_data *p, t_vector r, int j);
-int					ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t);
+int					ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t);
 int					drow(t_data *p);
 ////vector---------------------------------------
 t_vector			vec_mult_cst(t_vector a, double t);
@@ -132,17 +128,19 @@ double				vec_dot(t_vector a, t_vector b);
 double				vec_length(t_vector a);
 t_vector			vec_divis_cst(t_vector a, double t);
 t_3_vec				vec_3_init(t_vector p, t_vector n, t_vector v);
-t_3_vec 			new_vec_3(t_vector a, t_vector b, t_vector c);
+t_3_vec				new_vec_3(t_vector a, t_vector b, t_vector c);
+t_vector			vec_pow(t_vector d);
 ////light-----------------------------------------
 double				light_ambient();
-double				light_point(t_data *p, t_3_vec tre, t_light *light, double s);
+double				light_point(t_data *p, t_3_vec tre, t_light *light,
+								  double s);
 double				light_direction(t_data *p, t_3_vec tre, double s);
-double				light_intens(t_data *p ,t_3_vec tre, double s);
+double				light_intens(t_data *p, t_3_vec tre, double s);
 int					color(int color, double i);
-int					get_color(double t, t_data *q, t_vector d, t_orb *o);
+int					get_color(double t, t_data *q, t_vector d, t_obj *o);
 t_light				light_clon(const t_list	*light);
 double				spec(t_vector l, t_3_vec tre, double s, double i);
-int					shadow_ray_tracing(t_3_vec q, t_orb *o, t_t *t);
+int					shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t);
 int					shadow_render_cy(t_data *p, t_3_vec r, t_t *t);
 double				min(double a, double b, t_t *t);
 ////error-----------------------------------------
@@ -151,6 +149,14 @@ void				error(int cod);
 void				error_log(int cod);
 ////testing---------------------------------------
 void				test(t_data *p);
-void 				print_vec(t_vector v);
+void				print_vec(t_vector v);
 t_vector			rev_vec(t_vector a);
+////disc------------------------------------------
+double				disk_sphere(t_vector d, t_vector oc, t_obj *figur);
+double				disk_cone(t_vector d, t_vector oc, t_obj *figur);
+double				f_disk(t_vector d, t_vector oc, t_obj *figur);
+////norm------------------------------------------
+t_vector			norm_sphere(t_obj *fig, t_vector p);
+t_vector			norm_cone(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig);
+t_vector			normals(t_data *q, t_obj *fig, t_vector p, t_vector d, double t);
 #endif

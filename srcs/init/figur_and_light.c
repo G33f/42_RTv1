@@ -23,15 +23,16 @@ t_light	light_init(double x, double y, double z, double intens)
 	return (light);
 }
 
-t_orb	orb_init(int x, int y, int z, int r, int color, double spec)
+t_obj	obj_init(t_vector c, t_vector v, double a, double r, double specular, int color, int type)
 {
-	t_orb orb;
+	t_obj	obj;
 
-	orb.x = x;
-	orb.y = y;
-	orb.z = z;
-	orb.r = r;
-	orb.color = color;
-	orb.specular = spec;
-	return(orb);
+	obj.c = c;
+	obj.v = v;
+	obj.a = a;
+	obj.r = r;
+	obj.specular = specular;
+	obj.color = color;
+	obj.type = type;
+	return (obj);
 }
