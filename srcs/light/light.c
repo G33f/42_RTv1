@@ -34,6 +34,7 @@ double	light_point(t_data *p, t_3_vec tre, t_light *light, double s)
 	intens = light->intens;
 	l = new_vec(light->x, light->y, light->z);
 	l = vec_diff(l, tre.p);
+	//check = 0;
 	check = shadow_render_cy(p, new_vec_3(l ,tre.p, new_vec(0 ,0 , 1)), &t);
 	n_dot_l = vec_dot(tre.n, l);
 	if (n_dot_l > 0 && check != 1)

@@ -60,7 +60,7 @@ void	figur_init(t_data *p)
 	t_obj	o5;
 
 	p->figur = NULL;
-	o5 = obj_init(new_vec(0, 0, 2), new_vec(0, 1, 0), 3, 0, 300, 0xF0F000, CONE);
+	o5 = obj_init(new_vec(0, -2, 5), new_vec(0, 2, 0), 0.3, 0, 0, 0xF00000, CONE);
 	ft_lstadd(&p->figur, ft_lstnew(new_obj(o5), sizeof(t_obj)));
 	o1 = obj_init(new_vec(0, 1, 3), new_vec(0, 0, 0), 0, 1, 500, 0xFF0000, SPHERE);
 	ft_lstadd(&p->figur, ft_lstnew(new_obj(o1), sizeof(t_obj)));
