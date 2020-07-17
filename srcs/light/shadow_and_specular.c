@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 17:19:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/17 00:08:48 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/17 12:47:38 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t)
 	d = vec_diff(q.p, q.n);
 	d = vec_divis_cst(d, vec_length(d));
 	oc = vec_diff(q.n, o->c);
+	//oc = vec_divis_cst(oc, vec_length(oc));
 	disk = f_disk(d, oc, o);
 	if (disk <= 0 && o->type != PLANE)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 21:44:54 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/17 00:12:01 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/17 12:51:33 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ t_vector	norm_cone(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig)
 {
 	double		m;
 	t_vector	n;
-	double		a;
+	double		k;
 	//t_vector	a;
 
 	d = vec_divis_cst(d, vec_length(d));	
 	//fig->v = vec_divis_cst(fig->v, vec_length(fig->v));
-	//a = tan(fig->a);
+	k = tan(fig->a / 2);
 	m = vec_dot(d, fig->v) * t + vec_dot(oc, fig->v);
 	//a = vec_sum(fig->c, vec_mult_cst(fig->v, m));
-	a = tan(fig->a);
-	n = vec_diff(vec_diff(p, fig->c), vec_mult_cst(fig->v, (1 + a * a) * m));
+	n = vec_diff(vec_diff(p, fig->c), vec_mult_cst(fig->v, (1 + k * k) * m));
 	n = vec_divis_cst(n, vec_length(n));
 	return (n);
 }
@@ -49,6 +48,7 @@ t_vector	norm_cyl(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig)
 	fig->v = vec_divis_cst(fig->v, vec_length(fig->v));
 	//a = tan(fig->a);
 	m = vec_dot(d, fig->v) * t + vec_dot(oc, fig->v);
+	m = fig->r;
 	n = vec_diff(vec_diff(p, fig->c), vec_mult_cst(fig->v, m));
 	n = vec_divis_cst(n, vec_length(n));
 	return (n);

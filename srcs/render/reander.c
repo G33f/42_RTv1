@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/17 00:20:34 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/17 12:48:05 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	render_cy(t_data *p, t_vector r, int j)
 
 	f = p->figur;
 	color = 0;
-	t.t_min = 0;
+	t.t_min = 0.000001;
 	t.t_max = 2147483647;
 	while(f != NULL)
 	{
