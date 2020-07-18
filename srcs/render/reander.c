@@ -100,7 +100,12 @@ int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 	double		t1;
 	double		t2;
 
-	r = vec_divis_cst(r, vec_length(r));
+/*//	r = vec_divis_cst(r, vec_length(r));
+	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
+	d = vec_divis_cst(d, vec_length(d));
+	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
+//	oc = vec_rev(oc);
+	disk = f_disk(d, oc, o);*/
 	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
 	d = vec_divis_cst(d, vec_length(d));
 	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
@@ -114,7 +119,10 @@ int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 		{
 			t1 = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
 			if (t1 < t->t_max && t1 > t->t_min)
+			{
+				t->t_max = t1;
 				return (get_color(t1, p, d, o));
+			}
 		}
 		else
 			return (0);
@@ -125,6 +133,9 @@ int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 	if (t1 < t->t_max && t1 > t->t_min)
 	{
 		t->t_max = t1;
+//		printf("%d = %f\n", o->type, t1);
+//		return (color(0xFFFFFF, 2/t1));
+
 		return (get_color(t1, p, d, o));
 	}
 	return (0);
