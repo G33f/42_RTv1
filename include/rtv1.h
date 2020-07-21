@@ -227,9 +227,9 @@ void				usage(int cod);
 void				error(int cod);
 void				error_log(int cod);
 ////disc------------------------------------------
-double				disk_sphere(t_vector d, t_vector oc, t_obj *figur);
-double				disk_cone(t_vector d, t_vector oc, t_obj *figur);
-double				f_disk(t_vector d, t_vector oc, t_obj *figur);
+double				*disk_sphere(t_vector d, t_vector oc, t_obj *figur, double *t);
+double				*disk_cone(t_vector d, t_vector oc, t_obj *figur, double *t);
+double				*f_disk(t_vector d, t_vector oc, t_obj *figur, double *t);
 ////norm------------------------------------------
 t_vector			norm_sphere(t_obj *fig, t_vector p);
 t_vector			norm_cone(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig);
@@ -247,7 +247,8 @@ int					set_light(t_data *p, char **tab);
 int					camera(t_data *p, char **tab);
 int					sphere_init(t_data *p, int *n, char *line);
 
-double				min(double a, double b, t_t *t);
+double				min(double a, double b);
+double				max(double a, double b);
 int					len_tab(char **tab);
 double  			ft_strtodbl(char *s);
 void				create_thread(t_data *p);

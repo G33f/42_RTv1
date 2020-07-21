@@ -12,14 +12,20 @@
 
 #include "rtv1.h"
 
-double	min(double a, double b, t_t *t)
+double	min(double a, double b)
 {
-	if (a < b && a > t->t_min && a < t->t_max)
+	if (a < b && a >= 0)
 		return (a);
-	else if (b > t->t_min && b < t->t_max)
+	else if (b >= 0)
 		return (b);
-	/*else if (a > b && b < t->t_min && a < t->t_max && a > t->t_min)
-		return (a);*/
+	return (0.0);
+}
+double	max(double a, double b)
+{
+	if (a > b && a >= 0)
+		return (a);
+	if (b >= 0)
+		return (b);
 	return (0.0);
 }
 
@@ -96,47 +102,40 @@ int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 {
 	t_vector	d;
 	t_vector	oc;
-	double		disk;
-	double		t1;
-	double		t2;
+	double		tl[2];
+	double		*k;
 
-/*//	r = vec_divis_cst(r, vec_length(r));
 	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
 	d = vec_divis_cst(d, vec_length(d));
-	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
-//	oc = vec_rev(oc);
-	disk = f_disk(d, oc, o);*/
-	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
-	d = vec_divis_cst(d, vec_length(d));
-	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
-	disk = f_disk(d, oc, o);
-	if (disk <= 0 && o->type != PLANE)
-		return (0);
-	else if (o->type == PLANE)
-	{
-		//t1 = rt_plane(p, r, d, oc);
-		if (vec_dot(d, o->v) > 0.000001)
-		{
-			t1 = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
-			if (t1 < t->t_max && t1 > t->t_min)
-			{
-				t->t_max = t1;
-				return (get_color(t1, p, d, o));
-			}
-		}
-		else
-			return (0);
-	}
-	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
-	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
-	t1 = min(t1, t2, t);
-	if (t1 < t->t_max && t1 > t->t_min)
-	{
-		t->t_max = t1;
-//		printf("%d = %f\n", o->type, t1);
-//		return (color(0xFFFFFF, 2/t1));
 
-		return (get_color(t1, p, d, o));
+	//TODO delete
+	//o->c.y -= 1;
+
+	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
+
+
+	k = f_disk(d, oc, o, tl);
+	//TODO uncomment me for plane
+//	if (o->type == PLANE)
+//	{
+//		if (vec_dot(d, o->v) > 0.000001)
+//		{
+//			tl[0] = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
+//			if (tl[0] < t->t_max && tl[0] > t->t_min)
+//			{
+//				t->t_max = tl[0];
+//				return (get_color(tl[0], p, d, o));
+//			}
+//		}
+//		else
+//			return (0);
+//	}
+
+	if (k[0] < t->t_max && k[0] > t->t_min)
+	{
+		t->t_max = k[0];
+//		return (get_color(k[0], p, d, o));
+		return (color(0xFFFFFF, 2/k[0]));
 	}
 	return (0);
 }

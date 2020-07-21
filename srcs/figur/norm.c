@@ -28,6 +28,7 @@ t_vector	norm_cone(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig)
 	double		k;
 	//t_vector	a;
 
+	return ((t_vector){0, 1, 0});
 	//d = vec_divis_cst(d, vec_length(d));
 	//fig->v = vec_divis_cst(fig->v, vec_length(fig->v));
 	k = tan(fig->a / 2);
@@ -71,6 +72,6 @@ t_vector	normals(t_data *q, t_obj *fig, t_vector p, t_vector d, double t)
 			return (fig->v);
 		else
 			return (vec_mult_cst(fig->v, -1));
-	}	
+	}
 	return (new_vec(0, 0, 0));
 }
