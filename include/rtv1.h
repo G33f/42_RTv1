@@ -40,16 +40,31 @@
 //# define THREADS 32
 //# define THREAD_WIDTH 32
 
-/*typedef struct		s_obj
+typedef struct		s_vector
 {
-	int				x;
-	int				y;
-	int				z;
-	double			r;
-	int				color;
-	int				type;
-}					t_obj;*/
+	double			x;
+	double			y;
+	double			z;
+}					t_vector;
 
+typedef struct		s_3_vec
+{
+	t_vector		p;
+	t_vector		n;
+	t_vector		v;
+
+}					t_3_vec;
+
+typedef struct		s_disk
+{
+	t_vector 		v_min_vdotva;
+	double			v_min_vdotva_sqr;
+	t_vector 		delta_p;
+	double			delta_p_sqr;
+	double			cos_a_sqr;
+	double			sin_a_sqr;
+	double			dot_oc_v;
+}					t_disk;
 
 typedef	struct		s_t
 {
@@ -91,13 +106,6 @@ typedef struct		s_orb
 	struct s_orb	*next;
 }					t_orb;
 
-typedef struct		s_vector
-{
-	double			x;
-	double			y;
-	double			z;
-}					t_vector;
-
 typedef struct		s_obj
 {
 	t_vector		c;
@@ -108,14 +116,6 @@ typedef struct		s_obj
 	int				color;
 	int				type;
 }					t_obj;
-
-typedef struct		s_3_vec
-{
-	t_vector		p;
-	t_vector		n;
-	t_vector		v;
-
-}					t_3_vec;
 
 typedef struct		s_plane
 {
