@@ -32,15 +32,25 @@ double	*disk_cone(t_vector d, t_vector oc, t_obj *figur, double *t)
 	double	disk;
 
 	//TODO delete me
-	oc.y += 1.1;
+	//oc.y += 5;
 
 //	a = vec_dot(d, d) - (1 + f * f) * pow(vec_dot(d, figur->v), 2);
 //	b = 2 * vec_dot(d, oc) - (1 + f * f) * vec_dot(d, figur->v) * vec_dot(oc, figur->v);
 //	c = vec_dot(oc, oc) - (1 + f * f) * pow(vec_dot(oc, figur->v), 2);
-	//double acossqr =
-	a = pow(cos(figur->a), 2) * vec_dot(vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))), vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d)))) - (pow(sin(figur->a), 2) * pow(vec_dot(d, figur->v), 2));
-	b = 2 * pow(cos(figur->a), 2) * (vec_dot(vec_diff(d, vec_mult_cst(figur->v,vec_dot(figur->v, d))), vec_diff(oc, vec_mult_cst(figur->v, vec_dot(oc, figur->v))))) - 2 * pow(sin(figur->a), 2) * vec_dot(d, figur->v) * vec_dot(oc, figur->v);
-	c = pow(cos(figur->a), 2) * vec_dot(vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))),vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc)))) - pow(sin(figur->a), 2) * vec_dot(oc, figur->v);
+	t_vector 	v_min_vdotva = vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d)));
+	double		v_min_vdotva_sqr = vec_dot(v_min_vdotva, v_min_vdotva);
+
+	t_vector 	delta_p = vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc)));
+	double		delta_p_sqr = vec_dot(delta_p, delta_p);
+
+	double		cos_a_sqr = pow(cos(figur->a), 2);
+	double		sin_a_sqr = pow(sin(figur->a), 2);
+
+	double		dot_oc_v = vec_dot(oc, figur->v);
+
+	a = cos_a_sqr * v_min_vdotva_sqr - (sin_a_sqr * pow(vec_dot(d, figur->v), 2));
+	b = 2 * cos_a_sqr * (vec_dot(v_min_vdotva, delta_p)) - (2 * sin_a_sqr * vec_dot(d, figur->v) * dot_oc_v);
+	c = cos_a_sqr * delta_p_sqr - sin_a_sqr * pow(dot_oc_v, 2);
 
 	disk = pow(b, 2) - (4 * a * c);
 	t[0] = ((-b) + sqrt(disk)) / (2 * a);

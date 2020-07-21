@@ -107,35 +107,28 @@ int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 
 	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
 	d = vec_divis_cst(d, vec_length(d));
-
-	//TODO delete
-	//o->c.y -= 1;
-
 	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
-
-
 	k = f_disk(d, oc, o, tl);
-	//TODO uncomment me for plane
-//	if (o->type == PLANE)
-//	{
-//		if (vec_dot(d, o->v) > 0.000001)
-//		{
-//			tl[0] = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
-//			if (tl[0] < t->t_max && tl[0] > t->t_min)
-//			{
-//				t->t_max = tl[0];
-//				return (get_color(tl[0], p, d, o));
-//			}
-//		}
-//		else
-//			return (0);
-//	}
+	if (o->type == PLANE)
+	{
+		if (vec_dot(d, o->v) > 0.000001)
+		{
+			tl[0] = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
+			if (tl[0] < t->t_max && tl[0] > t->t_min)
+			{
+				t->t_max = tl[0];
+				return (get_color(tl[0], p, d, o));
+			}
+		}
+		else
+			return (0);
+	}
 
 	if (k[0] < t->t_max && k[0] > t->t_min)
 	{
 		t->t_max = k[0];
-//		return (get_color(k[0], p, d, o));
-		return (color(0xFFFFFF, 2/k[0]));
+		return (get_color(k[0], p, d, o));
+//		return (color(0xFFFFFF, 2/k[0]));
 	}
 	return (0);
 }
