@@ -26,14 +26,9 @@ t_vector	norm_cone(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig)
 	double		m;
 	t_vector	n;
 	double		k;
-	//t_vector	a;
 
-	return ((t_vector){0, 1, 0});
-	//d = vec_divis_cst(d, vec_length(d));
-	//fig->v = vec_divis_cst(fig->v, vec_length(fig->v));
-	k = tan(fig->a / 2);
+	k = tan(fig->a);
 	m = vec_dot(d, fig->v) * t + vec_dot(oc, fig->v);
-	//a = vec_sum(fig->c, vec_mult_cst(fig->v, m));
 	n = vec_diff(vec_diff(p, fig->c), vec_mult_cst(fig->v, (1 + k * k) * m));
 	n = vec_divis_cst(n, vec_length(n));
 	return (n);
@@ -44,12 +39,8 @@ t_vector	norm_cyl(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig)
 	double		m;
 	t_vector	n;
 
-	//ft_putstr("norm_cyl\n");
-	d = vec_divis_cst(d, vec_length(d));
 	fig->v = vec_divis_cst(fig->v, vec_length(fig->v));
-	//a = tan(fig->a);
 	m = vec_dot(d, fig->v) * t + vec_dot(oc, fig->v);
-	//m = fig->r;
 	n = vec_diff(vec_diff(p, fig->c), vec_mult_cst(fig->v, m));
 	n = vec_divis_cst(n, vec_length(n));
 	return (n);

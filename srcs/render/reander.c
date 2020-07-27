@@ -20,6 +20,7 @@ double	min(double a, double b)
 		return (b);
 	return (0.0);
 }
+
 double	max(double a, double b)
 {
 	if (a > b && a >= 0)
@@ -29,64 +30,7 @@ double	max(double a, double b)
 	return (0.0);
 }
 
-/*int	ray_tracing(t_data *p, t_vector r, t_orb *o, t_t *t)
-{
-	t_vector	d;
-	t_vector	oc;
-	double		disk;
-	double		t1;
-	double		t2;
-
-	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
-	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z),
-			new_vec(o->x, o->y, o->z));
-	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
-			(vec_dot(oc, oc) - pow(o->r, 2)));
-	if (disk <= 0)
-		return (0);
-	t1 = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
-	t2 = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
-	t1 = min(t1, t2, t);
-	if (t1 < t->t_max && t1 > t->t_min)
-	{
-		t->t_max = t1;
-		return (get_color(t1, p, d, o));
-	}
-	return (0);
-}*/
-
-/*int	ray_tracing_pl(t_data *p, t_vector r, t_plane *o, t_t *b)
-{
-	t_vector	l0;
-	//t_vector	oc;
-	t_vector	l;
-	t_vector	p0l0;
-	t_vector	p0;
-	//t_vector	p1;
-	double		t;
-	double f;
-
-	b->t_max = b->t_max;
-	//l = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
-	l0 = new_vec(p->camera.x, p->camera.y, p->camera.z);
-	l = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
-	//oc = vec_diff(l0, new_vec(o->x, o->y, o->z));
-	p0 = new_vec(o->x, o->y, o->z);
-	f = vec_dot(o->n, l);
-	if (f > 0.000001)
-	{
-		p0l0 = vec_diff(l0, p0);
-		t = vec_dot(p0l0, o->n);
-		if (t >= 0)
-		{
-			//p1 = vec_sum(vec_mult_cst(l, t), l0);
-			return (get_color_pl(t, p, l, l0, o));
-		}
-	}
-	return (0);
-}
-
-t_plane	plane_clon(const t_list *o)
+/*t_plane	plane_clon(const t_list *o)
 {
 	t_plane	p;
 
@@ -123,7 +67,6 @@ int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 		else
 			return (0);
 	}
-
 	if (k[0] < t->t_max && k[0] > t->t_min)
 	{
 		t->t_max = k[0];
@@ -143,7 +86,7 @@ void	render_cy(t_data *p, t_vector r, int j)
 
 	f = p->figur;
 	color = 0;
-	t.t_min = 0.000001;
+	t.t_min = 0;
 	t.t_max = 2147483647;
 	while(f != NULL)
 	{

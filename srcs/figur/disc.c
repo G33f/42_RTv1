@@ -42,7 +42,7 @@ double	*disk_cone(t_vector d, t_vector oc, t_obj *figur, double *t)
 
 	a = r.cos_a_sqr * r.v_min_vdotva_sqr - (r.sin_a_sqr * pow(vec_dot(d, figur->v), 2));
 	b = 2 * r.cos_a_sqr * (vec_dot(r.v_min_vdotva, r.delta_p)) - (2 * r.sin_a_sqr * vec_dot(d, figur->v) * r.dot_oc_v);
-	c = r.cos_a_sqr * r.delta_p_sqr - r.sin_a_sqr * pow(r.dot_oc_v, 2);
+	c = r.cos_a_sqr * r.delta_p_sqr - (r.sin_a_sqr * pow(r.dot_oc_v, 2));
 
 	disk = pow(b, 2) - (4 * a * c);
 	t[0] = ((-b) + sqrt(disk)) / (2 * a);

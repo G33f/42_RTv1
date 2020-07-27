@@ -32,11 +32,11 @@ int	shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t)
 
 	d = vec_diff(q.p, q.n);
 	oc = vec_diff(q.n, o->c);
-	d = vec_divis_cst(d, vec_length(d));
+//	d = vec_divis_cst(d, vec_length(d));
 	k = f_disk(d, oc, o, tl);
 	if (o->type == PLANE)
 	{
-		if (vec_dot(d, o->v) > 0.000001)
+		if (vec_dot(d, o->v) > 0.00000001)
 		{
 			tl[0] = (-1 * vec_dot(oc, o->v)) / vec_dot(d, o->v);
 			if (tl[0] < t->t_max && tl[0] > t->t_min)

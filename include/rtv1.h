@@ -49,9 +49,9 @@ typedef struct		s_vector
 
 typedef struct		s_3_vec
 {
-	t_vector		p;
-	t_vector		n;
-	t_vector		v;
+	t_vector		p;	//l
+	t_vector		n;	//p
+	t_vector		v;	//0.0.1
 
 }					t_3_vec;
 
