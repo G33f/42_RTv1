@@ -164,6 +164,12 @@ typedef struct 		s_l
 	int				shadows;
 }					t_l;
 
+typedef struct		s_res
+{
+	t_vector		d;
+	t_obj			o;
+	double			t;
+}					t_res;
 
 typedef struct		s_data
 {
@@ -197,7 +203,7 @@ int					figur_init(t_data *p, char *type, char *line);
 ////render----------------------------------------
 int					render(t_data *p);
 void				render_cy(t_data *p, t_vector r, int j);
-int					ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t);
+t_res				ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t);
 int					drow(t_data *p);
 ////vector---------------------------------------
 t_vector			vec_mult_cst(t_vector a, double t);

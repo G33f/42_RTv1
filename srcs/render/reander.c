@@ -42,7 +42,7 @@ double	max(double a, double b)
 	return(p);
 }*/
 
-int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
+t_res	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 {
 	t_vector	d;
 	t_vector	oc;
@@ -61,42 +61,41 @@ int	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 			if (tl[0] < t->t_max && tl[0] > t->t_min)
 			{
 				t->t_max = tl[0];
-				return (get_color(tl[0], p, d, o));
+				return ((t_res){d, *o, 0});
 			}
 		}
 		else
-			return (0);
+			return ((t_res){d, *o, 0});
 	}
 	if (k[0] < t->t_max && k[0] > t->t_min)
-	{
-		t->t_max = k[0];
-		return (get_color(k[0], p, d, o));
-//		return (color(0xFFFFFF, 2/k[0]));
-	}
-	return (0);
+		return ((t_res){d, *o, k[0]});
+	return ((t_res){(t_vector) {0, 0, 0}, *o, t->t_max});
 }
 
 void	render_cy(t_data *p, t_vector r, int j)
 {
 	t_list	*f;
-	t_obj	o;
-	int		color;
-	int		buf;
+	static t_obj	o;
+	t_res	buf;
+	t_res	res;
 	t_t		t;
 
 	f = p->figur;
-	color = 0;
-	t.t_min = 0;
-	t.t_max = 2147483647;
+	t.t_min = 0.0;
+	t.t_max = 2147483647.0;
+	res = (t_res){(t_vector) {0, 0, 0}, o, t.t_max};
 	while(f != NULL)
 	{
 		o = obj_clon(f);
 		buf = ray_tracing(p, new_vec(r.x, r.y, p->camera.canv_d), &o, &t);
-		if (buf > 0)
-			color = buf;
+		if (buf.t < res.t && buf.t > t.t_min)
+			res = buf;
 		f = f->next;
 	}
-	p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color;
+	if (res.t == t.t_max)
+		p->canv.img_data[(int)r.z * p->camera.canv_w + j] = 0x000000;
+	else
+		p->canv.img_data[(int)r.z * p->camera.canv_w + j] = get_color(res.t, p, res.d, &res.o);
 }
 
 int render(t_data *p)
