@@ -59,10 +59,10 @@ t_vector	normals(t_data *q, t_obj *fig, t_vector p, t_vector d, double t)
 		return (norm_cyl(oc, t, d, p, fig));
 	if (fig->type == PLANE)
 	{
-		if (vec_dot(d, fig->v) >= 0)
-			return (fig->v);
+		if (vec_dot(d, fig->v) > 0)
+			return (rev_vec(fig->v));
 		else
-			return (vec_mult_cst(fig->v, -1));
+			return (fig->v);
 	}
 	return (new_vec(0, 0, 0));
 }

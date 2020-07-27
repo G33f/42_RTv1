@@ -12,12 +12,19 @@
 
 #include "rtv1.h"
 
+double	*disk_plane(t_vector d, t_vector oc, t_obj *figur, double *t)
+{
+	t[0] = (vec_dot(rev_vec(oc), figur->v)) / vec_dot(d, figur->v);
+	return (t);
+}
+
 double	*disk_sphere(t_vector d, t_vector oc, t_obj *figur, double *t)
 {
 	double	disk;
 
 	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
 			(vec_dot(oc, oc) - pow(figur->r, 2)));
+
 	t[0] = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
 	t[1] = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
 	t[0] = min(t[0], t[1]);
@@ -61,6 +68,7 @@ double	*disk_cyl(t_vector d, t_vector oc, t_obj *figur, double *t)
 	a = vec_dot(vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))), vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))));
 	b =	2 * vec_dot(vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))), vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))));
 	c = vec_dot(vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))), vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc)))) - pow(figur->r, 2);
+
 	disk = pow(b, 2) - (4 * a * c);
 	t[0] = ((-b) + sqrt(disk)) / (2 * a);
 	t[1] = ((-b) - sqrt(disk)) / (2 * a);
@@ -76,7 +84,7 @@ double	*f_disk(t_vector d, t_vector oc, t_obj *figur, double *t)
 		return (disk_cone(d, oc, figur, t));
 	if (figur->type == CYLINDER)
 		return (disk_cyl(d, oc, figur, t));
-	//if (figur->type == PLANE)
-		//return (disk_pl(d, oc, figur));
+	if (figur->type == PLANE)
+		return (disk_plane(d, oc, figur, t));
 	return (t);
 }

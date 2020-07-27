@@ -76,7 +76,6 @@ int		figur_init(t_data *p, char *type, char *line)
 	ft_strtodbl(tab1[6]), ft_strtodbl(tab1[7]));
 	o1 = obj_init2(o1, ft_strtodbl(tab1[8]), tab1[9], t);
 	o2 = new_obj(o1);
-	//printf("%d\n", o2->type);
 	ft_lstadd(&p->figur, ft_lstnew(o2, sizeof(t_obj)));
 	free(o2);
 	free_tab(tab1);

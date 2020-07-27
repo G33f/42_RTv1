@@ -177,7 +177,6 @@ typedef struct		s_data
 	t_mlx			mlx;
 	t_img			canv;
 	t_camera		camera;
-	//t_obj			*obj;
 	t_list			*figur;
 	t_list			*light;
 	t_l				l;
