@@ -23,7 +23,7 @@ double	light_point(t_data *p, t_3_vec tre, t_light *light, double s)
 	t.t_min = 0.000000000001;
 	t.t_max = 1.0;
 	intens = light->intens;
-	l = new_vec(light->x, light->y, light->z);
+	l = (t_vector){light->x, light->y, light->z};
 	check = shadow_render_cy(p, new_vec_3(l ,tre.p, new_vec(0 ,0 , 1)), &t);
 	l = vec_diff(l, tre.p);
 	n_dot_l = vec_dot(tre.n, l);
@@ -72,9 +72,8 @@ int get_color(double t, t_data *q, t_vector d, t_obj *o)
 	t_3_vec		tre;
 	double		i;
 
-	tre.p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
+	tre.p = vec_sum(new_vec(q->camera.x, q->camera.y, q->camera.z),
 			vec_mult_cst(d, t));
-//	tre.p = vec_sum(new_vec(0,0,0), vec_mult_cst(d, t));
 	tre.n = normals(q, o, tre.p, d, t);
 	tre.v = rev_vec(d);
 	i = light_intens(q, tre, o->specular);

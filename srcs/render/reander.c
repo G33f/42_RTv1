@@ -89,7 +89,6 @@ int		render(t_data *p)
 	i = 0;
 	while (y < p->camera.y + p->camera.canv_h / 2)
 	{
-		printf("all right %d\n", j);
 		j = 0;
 		x = p->camera.x - p->camera.canv_w / 2;
 		while (x < p->camera.x + p->camera.canv_w / 2)

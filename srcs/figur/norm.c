@@ -64,5 +64,5 @@ t_vector	normals(t_data *q, t_obj *fig, t_vector p, t_vector d, double t)
 		else
 			return (fig->v);
 	}
-	return (new_vec(0, 0, 0));
+	return ((t_vector){0, 0, 0});
 }
