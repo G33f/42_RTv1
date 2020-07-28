@@ -74,6 +74,7 @@ int get_color(double t, t_data *q, t_vector d, t_obj *o)
 
 	tre.p = vec_sum(new_vec(q->camera.x, q->camera.x, q->camera.x),
 			vec_mult_cst(d, t));
+//	tre.p = vec_sum(new_vec(0,0,0), vec_mult_cst(d, t));
 	tre.n = normals(q, o, tre.p, d, t);
 	tre.v = rev_vec(d);
 	i = light_intens(q, tre, o->specular);

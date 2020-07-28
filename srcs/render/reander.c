@@ -37,9 +37,9 @@ t_res	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 	double		tl[2];
 	double		*k;
 
-	d = vec_diff(r, new_vec(p->camera.x, p->camera.y, p->camera.z));
+	d = vec_diff(r, (t_vector){p->camera.x, p->camera.y, p->camera.z});
 	d = vec_divis_cst(d, vec_length(d));
-	oc = vec_diff(new_vec(p->camera.x, p->camera.y, p->camera.z), o->c);
+	oc = vec_diff((t_vector){p->camera.x, p->camera.y, p->camera.z}, o->c);
 	o->v = vec_divis_cst(o->v, vec_length(o->v));
 	k = f_disk(d, oc, o, tl);
 	if (k[0] < t->t_max && k[0] > t->t_min)
@@ -72,6 +72,10 @@ void	render_cy(t_data *p, t_vector r, int j)
 	else
 		p->canv.img_data[(int)r.z * p->camera.canv_w + j] = get_color(
 				res.t, p, res.d, &res.o);
+/*	if (res.t == t.t_max)
+		p->canv.img_data[(int)r.z * p->camera.canv_w + j] = 0x000000;
+	else
+		p->canv.img_data[(int)r.z * p->camera.canv_w + j] = color(0xFFFFFF, 2/res.t);*/
 }
 
 int		render(t_data *p)
@@ -81,10 +85,11 @@ int		render(t_data *p)
 	int x;
 	int	y;
 
-	y = p->camera.x - p->camera.canv_h / 2;
+	y = p->camera.y - p->camera.canv_h / 2;
 	i = 0;
 	while (y < p->camera.y + p->camera.canv_h / 2)
 	{
+		printf("all right %d\n", j);
 		j = 0;
 		x = p->camera.x - p->camera.canv_w / 2;
 		while (x < p->camera.x + p->camera.canv_w / 2)
