@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/16 23:57:06 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/30 18:35:58 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@
 # define AQUA 61680
 # define WIN_SIZE_X	960
 # define WIN_SIZE_Y	960
+# define NO_CAMERA 7
+# define USAGE 8
+# define NO_OBJECTS 9
+# define PARAMETERS 10
+# define NO_FD 11
 //# define THREADS 32
 //# define THREAD_WIDTH 32
 
@@ -137,6 +142,7 @@ typedef struct		s_camera
 	int				canv_h;
 	int				canv_w;
 	int				canv_d;
+	int				cam;
 }					t_camera;
 
 typedef struct		s_img
@@ -231,6 +237,7 @@ int					shadow_render_cy(t_data *p, t_3_vec r, t_t *t);
 void				usage(int cod);
 void				error(int cod);
 void				error_log(int cod);
+int					error_output(int err);
 ////disc------------------------------------------
 double				*disk_sphere(t_vector d, t_vector oc, t_obj *figur, double *t);
 double				*disk_cone(t_vector d, t_vector oc, t_obj *figur, double *t);

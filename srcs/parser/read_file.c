@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:06:23 by mgalt             #+#    #+#             */
-/*   Updated: 2020/07/16 20:48:51 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/30 18:38:53 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int		object_num(char *file)
 
 	n = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
-	{
-		ft_putstr("Error: cannot open file\n");
-		return (-1);
-	}
+		return (error_output(NO_FD));
 	while ((get_next_line(fd, &line)) > 0)
 	{
 		if ((ft_strncmp(line, "sphere", 6)) == 0 ||
@@ -68,7 +65,8 @@ int		figur_init(t_data *p, char *type, char *line)
 	if (tab_len < 10 || !t)
 	{
 		free_tab(tab1);
-		return (-1);
+		return (error_output(PARAMETERS));
+		//return (-1);
 	}
 	o1 = obj_init1(new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]),
 	ft_atoi(tab1[2])), new_vec(ft_strtodbl(tab1[3]),
@@ -85,14 +83,23 @@ int		figur_init(t_data *p, char *type, char *line)
 int		create_obj(t_data *p, char *line)
 {
 	char	**tab;
+	int		ret;
 
 	tab = NULL;
+	ret = 0;
 	tab = ft_strsplit(line, ' ');
 	if (ft_strequ(tab[0], "sphere") || ft_strequ(tab[0], "cylinder") ||
 	ft_strequ(tab[0], "cone") || ft_strequ(tab[0], "plane"))
-		figur_init(p, tab[0], tab[1]);
+	{
+		ret = figur_init(p, tab[0], tab[1]);
+		if (ret == -1)
+			return (-1);
+	}
 	if (ft_strequ(tab[0], "camera"))
+	{
+		p->camera.cam++;
 		camera(p, tab);
+	}
 	if (ft_strequ(tab[0], "light"))
 		set_light(p, tab);
 	if (ft_strequ(tab[0], "ambient"))
@@ -110,20 +117,22 @@ int		read_file(t_data *p, char *file)
 
 	i = 0;
 	p->obj_n = object_num(file);
+	if (p->obj_n == -1)
+		return (-1);
 	p->figur = NULL;
 	p->light = NULL;
+	p->camera.cam = 0;
 	if (!p->obj_n)
-	{
-		ft_putstr("File is invalid: no objects found\n");
-		return (-1);
-	}
+		return (error_output(NO_OBJECTS));
 	if ((p->fd = open(file, O_RDONLY)) == -1)
-		return (-1);
+		return (error_output(NO_FD));
 	while ((get_next_line(p->fd, &line)) > 0)
 	{
 		create_obj(p, line);
 		free(line);
 	}
+	if (!p->camera.cam)
+		return (error_output(NO_CAMERA));
 	init(p);
 	close(p->fd);
 	render(p);

@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:16:15 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/13 15:25:18 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/07/30 18:35:00 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int main(int ac, char **av)
 		mlx_loop(p.mlx.mlx);
 	}
 	else
-		ft_putstr("\nUsage: ./RTv1 <scene>\n\n");
+		error_output(USAGE);
 	return(0);
 }
