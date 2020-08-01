@@ -54,9 +54,9 @@ typedef struct		s_vector
 
 typedef struct		s_3_vec
 {
-	t_vector		p;	//l
-	t_vector		n;	//p
-	t_vector		v;	//0.0.1
+	t_vector		p;
+	t_vector		n;
+	t_vector		v;
 
 }					t_3_vec;
 
@@ -177,6 +177,14 @@ typedef struct		s_res
 	double			t;
 }					t_res;
 
+typedef struct		s_qn
+{
+	double			w;
+	double			x;
+	double			y;
+	double			z;
+}					t_qn;
+
 typedef struct		s_data
 {
 	t_img			img;
@@ -185,6 +193,7 @@ typedef struct		s_data
 	t_camera		camera;
 	t_list			*figur;
 	t_list			*light;
+	t_qn			rot;
 	t_l				l;
 	int				x;
 	int				y;
@@ -210,6 +219,13 @@ int					render(t_data *p);
 void				render_cy(t_data *p, t_vector r, int j);
 t_res				ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t);
 int					drow(t_data *p);
+///rot -----------------------
+t_qn				qn_min(t_qn s);
+t_qn				qn_sum(t_qn q1, t_qn q2);
+void				magn(t_qn *st);
+void				qn_rot(t_data *p, t_qn qn, double agl);
+t_qn				rotate_e(t_qn vec, t_data *p);
+void				rot(t_vector *p1, t_data *p);
 ////vector---------------------------------------
 t_vector			vec_mult_cst(t_vector a, double t);
 t_vector			vec_diff(t_vector a, t_vector b);

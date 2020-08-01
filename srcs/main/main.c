@@ -35,6 +35,7 @@ int main(int ac, char **av)
 {
 	t_data	p;
 
+	p.rot = (t_qn){1, 0, 0, 0};
 	if (ac == 2)
 	{
 		if ((read_file(&p, av[1])) == -1)
