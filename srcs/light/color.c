@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 10:20:34 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/04 10:20:45 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/08/05 16:42:10 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		color(int color, double i)
 
 	red = (color >> 16) & 0xFF;
 	red = (int)(red * i);
+	//0xF1FFCC
 	if (red > 0x0000FF)
 		red = 0x0000FF;
 	green = (color >> 8) & 0xFF;

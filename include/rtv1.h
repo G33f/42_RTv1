@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/30 18:35:58 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/05 18:49:33 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@
 # define CAMERA 6
 # define RED 16711680
 # define GREEN 65280
-# define BLUE 255
-# define YELLOW 16776960
+# define BLUE 2831278
+# define YELLOW 15131741 //16776960
 # define AQUA 61680
+# define GRAY 6447965 //5790037
+# define GREY 9539985
+# define GREY1 7829367
 # define WIN_SIZE_X	960
 # define WIN_SIZE_Y	960
 # define NO_CAMERA 7
@@ -168,6 +171,7 @@ typedef struct 		s_l
 	double			ambient;
 	double			specular;
 	int				shadows;
+	int				is_dir;
 }					t_l;
 
 typedef struct		s_res
@@ -249,6 +253,7 @@ t_light				light_clon(const t_list	*light);
 double				spec(t_vector l, t_3_vec tre, double s, double i);
 int					shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t);
 int					shadow_render_cy(t_data *p, t_3_vec r, t_t *t);
+void				ambience(t_data *p, char *s);
 ////error-----------------------------------------
 void				usage(int cod);
 void				error(int cod);

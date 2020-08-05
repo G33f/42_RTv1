@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:06:23 by mgalt             #+#    #+#             */
-/*   Updated: 2020/07/30 18:38:53 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/05 18:57:23 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,12 @@ int		create_obj(t_data *p, char *line)
 	if (ft_strequ(tab[0], "light"))
 		set_light(p, tab);
 	if (ft_strequ(tab[0], "ambient"))
-		p->l.ambient = ft_strtodbl(tab[1]);
+	{
+		/*p->l.ambient = ft_strtodbl(tab[1]);
+		if (p->l.ambient > 1)
+			p->l.ambient = 1;*/
+		ambience(p, tab[1]);
+	}
 	if (ft_strequ(tab[0], "shadows"))
 		p->l.shadows = ft_atoi(tab[1]);
 	free_tab(tab);
@@ -117,6 +122,7 @@ int		read_file(t_data *p, char *file)
 
 	i = 0;
 	p->obj_n = object_num(file);
+	p->l.is_dir = 0;
 	if (p->obj_n == -1)
 		return (-1);
 	p->figur = NULL;
@@ -133,6 +139,11 @@ int		read_file(t_data *p, char *file)
 	}
 	if (!p->camera.cam)
 		return (error_output(NO_CAMERA));
+	/*if (!p->l.is_dir)
+	{
+		p->l.l_d = new_vec(0, 0, 0);
+		p->l.intens_d = 0;
+	}*/
 	init(p);
 	close(p->fd);
 	render(p);

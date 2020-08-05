@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:54:36 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/16 20:09:36 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/05 17:12:52 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ t_obj	obj_init2(t_obj obj, double specular, char *color, int type)
 		obj.color = YELLOW;
 	else if (ft_strequ(color, "aqua"))
 		obj.color = AQUA;
+	else if (ft_strequ(color, "gray"))
+		obj.color = GRAY;
+	else if (ft_strequ(color, "grey"))
+		obj.color = GREY;
+	else if (ft_strequ(color, "grey1"))
+		obj.color = GREY1;
 	else
 		obj.color = 249710846;
 	obj.type = type;

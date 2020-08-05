@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/17 12:48:05 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/05 18:37:50 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_res	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 	double		*k;
 
 	d = vec_diff(r, (t_vector){p->camera.x, p->camera.y, p->camera.z});
-	rot(&d, p);
+	//rot(&d, p);
 	d = vec_divis_cst(d, vec_length(d));
 	oc = vec_diff((t_vector){p->camera.x, p->camera.y, p->camera.z}, o->c);
 	o->v = vec_divis_cst(o->v, vec_length(o->v));
