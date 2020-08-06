@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/06 21:03:05 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/06 21:25:04 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,11 +169,7 @@ typedef struct		s_mlx
 typedef struct 		s_l
 {
 	t_vector		l_d;
-	double			intens_p;
-	double			intens_d;
-	double			ambient;
-	double			specular;
-	int				shadows;
+	double			intens;
 	int				is_dir;
 }					t_l;
 
@@ -199,10 +195,10 @@ typedef struct		s_data
 	t_img			canv;
 	t_camera		camera;
 	t_list			*figur;
-	t_list			*light;
-	
+	t_list			*light;	
 	t_qn			rot;
 	t_l				l;
+	double			ambient;
 	int				x;
 	int				y;
 	int				max_x;

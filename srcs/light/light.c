@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 07:32:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/06 20:47:10 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/06 21:21:07 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ double	light_intens(t_data *p ,t_3_vec tre, double s)
 	t_light	l;
 
 	t = p->light;
-	i = p->l.ambient;
+	i = p->ambient;
 	i += light_direction(p, tre, s);
 	while(t != NULL)
 	{

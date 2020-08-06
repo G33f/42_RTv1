@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:39:03 by mgalt             #+#    #+#             */
-/*   Updated: 2020/08/05 18:42:12 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/06 21:24:09 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	lights_init(t_data *p, char **s)
 
 void	ambience(t_data *p, char *s)
 {
-	p->l.ambient = ft_strtodbl(s);
-	if (p->l.ambient > 1)
-		p->l.ambient = 1;
+	p->ambient = ft_strtodbl(s);
+	if (p->ambient > 1)
+		p->ambient = 1;
 }
 
 int		set_light(t_data *p, char **tab)
@@ -67,10 +67,8 @@ int		set_light(t_data *p, char **tab)
 		lights_init(p, tab1);
 	if (ft_strequ(tab[0], "light") && ft_strequ(tab[1], "direction"))
 	{
-		/*p->l_d = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]));
-		p->intens_d = ft_strtodbl(tab1[3]);*/
 		p->l.l_d = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]));
-		p->l.intens_d = ft_strtodbl(tab1[3]);
+		p->l.intens = ft_strtodbl(tab1[3]);
 		p->l.is_dir++;
 	}
 	free_tab(tab1);

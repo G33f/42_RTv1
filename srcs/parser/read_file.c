@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:06:23 by mgalt             #+#    #+#             */
-/*   Updated: 2020/08/06 21:06:11 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/06 21:18:49 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ int		create_obj(t_data *p, char *line)
 		set_light(p, tab);
 	if (ft_strequ(tab[0], "ambient"))
 		ambience(p, tab[1]);
-	if (ft_strequ(tab[0], "shadows"))
-		p->l.shadows = ft_atoi(tab[1]);
 	free_tab(tab);
 	return (0);
 }
