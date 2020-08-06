@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:06:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/05 18:37:50 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/06 21:02:35 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_res	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 	double		*k;
 
 	d = vec_diff(r, (t_vector){p->camera.x, p->camera.y, p->camera.z});
-	//rot(&d, p);
+	rot(&d, p);
 	d = vec_divis_cst(d, vec_length(d));
 	oc = vec_diff((t_vector){p->camera.x, p->camera.y, p->camera.z}, o->c);
 	o->v = vec_divis_cst(o->v, vec_length(o->v));
@@ -82,7 +82,9 @@ int		render(t_data *p)
 	int x;
 	int	y;
 
-	qn_rot(p, (t_qn){1, 0, 0, 1}, 0.2);
+	//qn_rot(p, (t_qn){1, 1, 0, 0}, 0.2);
+	//qn_rot(p, (t_qn){1, 0, 0, 1}, 0.7);
+	rotation(p);	
 	y = p->camera.y - p->camera.canv_h / 2;
 	i = 0;
 	while (y < p->camera.y + p->camera.canv_h / 2)

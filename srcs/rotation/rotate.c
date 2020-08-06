@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 04:53:26 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/01 04:53:28 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/08/06 21:02:10 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ void	rot(t_vector *p1, t_data *p)
 	p1->x = vec.x;
 	p1->y = vec.y;
 	p1->z = vec.z;
+}
+
+void	rotation(t_data *p)
+{
+	qn_rot(p, (t_qn){1, 1, 0, 0}, p->camera.rot_x);
+	qn_rot(p, (t_qn){1, 0, 1, 0}, p->camera.rot_y);
+	qn_rot(p, (t_qn){1, 0, 0, 1}, p->camera.rot_z);
 }

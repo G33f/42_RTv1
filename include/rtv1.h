@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/05 18:49:33 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/06 21:03:05 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@ typedef struct		s_camera
 	int				canv_h;
 	int				canv_w;
 	int				canv_d;
+	double			rot_x;
+	double			rot_y;
+	double			rot_z;
 	int				cam;
 }					t_camera;
 
@@ -197,6 +200,7 @@ typedef struct		s_data
 	t_camera		camera;
 	t_list			*figur;
 	t_list			*light;
+	
 	t_qn			rot;
 	t_l				l;
 	int				x;
@@ -230,6 +234,7 @@ void				magn(t_qn *st);
 void				qn_rot(t_data *p, t_qn qn, double agl);
 t_qn				rotate_e(t_qn vec, t_data *p);
 void				rot(t_vector *p1, t_data *p);
+void				rotation(t_data *p);
 ////vector---------------------------------------
 t_vector			vec_mult_cst(t_vector a, double t);
 t_vector			vec_diff(t_vector a, t_vector b);

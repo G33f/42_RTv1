@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 07:32:30 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/16 23:45:59 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/06 20:47:10 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	light_direction(t_data *p, t_3_vec tre, double s)
 
 	t.t_min = 0.000000000001;
 	t.t_max = 2147483647.0;
-	intens = 0.0;
+	intens = 0.3;
 	n_dot_l = vec_dot(tre.n, p->l.l_d);
 	if (n_dot_l > 0 && !shadow_render_cy(p, new_vec_3(p->l.l_d ,tre.p, new_vec(0 ,0 , 1)), &t))
 		return((intens * n_dot_l / (vec_length(tre.n) * vec_length(p->l.l_d)) + spec(p->l.l_d, tre, s, intens)));
