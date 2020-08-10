@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef RTV1_H
 
 # define RTV1_H
@@ -33,9 +32,9 @@
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 2831278
-# define YELLOW 15131741 //16776960
+# define YELLOW 15131741
 # define AQUA 61680
-# define GRAY 6447965 //5790037
+# define GRAY 6447965
 # define GREY 9539985
 # define GREY1 7829367
 # define WIN_SIZE_X	960
@@ -45,8 +44,6 @@
 # define NO_OBJECTS 9
 # define PARAMETERS 10
 # define NO_FD 11
-//# define THREADS 32
-//# define THREAD_WIDTH 32
 
 typedef struct		s_vector
 {
@@ -65,9 +62,9 @@ typedef struct		s_3_vec
 
 typedef struct		s_disk
 {
-	t_vector 		v_min_vdotva;
+	t_vector		v_min_vdotva;
 	double			v_min_vdotva_sqr;
-	t_vector 		delta_p;
+	t_vector		delta_p;
 	double			delta_p_sqr;
 	double			cos_a_sqr;
 	double			sin_a_sqr;
@@ -88,7 +85,7 @@ typedef struct		s_light
 	double			intens;
 }					t_light;
 
-typedef struct 		s_cone
+typedef struct		s_cone
 {
 	int				x;
 	int				y;
@@ -134,7 +131,7 @@ typedef struct		s_plane
 	t_vector		n;
 	int				color;
 	int				type;
-	struct s_plane	*next;	
+	struct s_plane	*next;
 }					t_plane;
 
 typedef struct		s_camera
@@ -166,7 +163,7 @@ typedef struct		s_mlx
 	void			*mlx;
 }					t_mlx;
 
-typedef struct 		s_l
+typedef struct		s_l
 {
 	t_vector		l_d;
 	double			intens;
@@ -195,7 +192,7 @@ typedef struct		s_data
 	t_img			canv;
 	t_camera		camera;
 	t_list			*figur;
-	t_list			*light;	
+	t_list			*light;
 	t_qn			rot;
 	t_l				l;
 	double			ambient;
@@ -208,22 +205,31 @@ typedef struct		s_data
 	int				line_nbr;
 }					t_data;
 
-////init------------------------------------------
+/*
+**init------------------------------------------
+*/
 int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
-////init figures----------------------------------
+/*
+**init figures----------------------------------
+*/
 t_obj				obj_init1(t_vector c, t_vector v, double a, double r);
-t_obj				obj_init2(t_obj obj, double specular, char *color, int type);
+t_obj				obj_init2(t_obj obj, double specular, char *color,
+		int type);
 t_obj				obj_clon(const t_list *o);
 t_obj				*new_obj(t_obj new);
 int					figur_init(t_data *p, char *type, char *line);
-////render----------------------------------------
+/*
+**render----------------------------------------
+*/
 int					render(t_data *p);
 void				render_cy(t_data *p, t_vector r, int j);
 t_res				ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t);
 int					drow(t_data *p);
-///rot -----------------------
+/*
+**rot -----------------------
+*/
 t_qn				qn_min(t_qn s);
 t_qn				qn_sum(t_qn q1, t_qn q2);
 void				magn(t_qn *st);
@@ -231,7 +237,9 @@ void				qn_rot(t_data *p, t_qn qn, double agl);
 t_qn				rotate_e(t_qn vec, t_data *p);
 void				rot(t_vector *p1, t_data *p);
 void				rotation(t_data *p);
-////vector---------------------------------------
+/*
+**vector---------------------------------------
+*/
 t_vector			vec_mult_cst(t_vector a, double t);
 t_vector			vec_diff(t_vector a, t_vector b);
 t_vector			vec_sum(t_vector a, t_vector b);
@@ -242,11 +250,14 @@ double				vec_length(t_vector a);
 t_vector			vec_divis_cst(t_vector a, double t);
 t_vector			rev_vec(t_vector a);
 t_3_vec				new_vec_3(t_vector a, t_vector b, t_vector c);
-////light-----------------------------------------
+/*
+**light-----------------------------------------
+*/
 double				light_ambient();
-double				light_point(t_data *p, t_3_vec tre, t_light *light, double s);
+double				light_point(t_data *p, t_3_vec tre, t_light *light,
+		double s);
 double				light_direction(t_data *p, t_3_vec tre, double s);
-double				light_intens(t_data *p ,t_3_vec tre, double s);
+double				light_intens(t_data *p, t_3_vec tre, double s);
 double				spec(t_vector l, t_3_vec tre, double s, double i);
 int					color(int color, double i);
 int					get_color(double t, t_data *q, t_vector d, t_obj *o);
@@ -255,23 +266,36 @@ double				spec(t_vector l, t_3_vec tre, double s, double i);
 int					shadow_ray_tracing(t_3_vec q, t_obj *o, t_t *t);
 int					shadow_render_cy(t_data *p, t_3_vec r, t_t *t);
 void				ambience(t_data *p, char *s);
-////error-----------------------------------------
+/*
+**error-----------------------------------------
+*/
 void				usage(int cod);
 void				error(int cod);
 void				error_log(int cod);
 int					error_output(int err);
-////disc------------------------------------------
-double				*disk_sphere(t_vector d, t_vector oc, t_obj *figur, double *t);
-double				*disk_cone(t_vector d, t_vector oc, t_obj *figur, double *t);
+/*
+**disc------------------------------------------
+*/
+double				*disk_sphere(t_vector d, t_vector oc, t_obj *figur,
+		double *t);
+double				*disk_cone(t_vector d, t_vector oc, t_obj *figur,
+		double *t);
 double				*f_disk(t_vector d, t_vector oc, t_obj *figur, double *t);
-////norm------------------------------------------
+/*
+**norm------------------------------------------
+*/
 t_vector			norm_sphere(t_obj *fig, t_vector p);
-t_vector			norm_cone(t_vector oc, double t, t_vector d, t_vector p, t_obj *fig);
-t_vector			normals(t_data *q, t_obj *fig, t_vector p, t_vector d, double t);
-////keys------------------------------------------
+t_vector			norm_cone(double t, t_3_vec buf, t_obj *fig);
+t_vector			norm_cyl(double t, t_3_vec buf, t_obj *fig);
+t_vector			normals(t_data *q, t_obj *fig, t_3_vec buf, double t);
+/*
+**keys------------------------------------------
+*/
 int					key_press(int key, t_data *p);
 int					escape(void);
-////parsing---------------------------------------
+/*
+**parsing---------------------------------------
+*/
 int					create_obj(t_data *p, char *line);
 int					read_file(t_data *p, char *file);
 int					object_num(char *file);
@@ -280,13 +304,16 @@ void				free_tab(char **tab);
 int					set_light(t_data *p, char **tab);
 int					camera(t_data *p, char **tab);
 int					sphere_init(t_data *p, int *n, char *line);
-
+/*
+**utils-----------------------------------------
+*/
 double				min(double a, double b);
 double				max(double a, double b);
 int					len_tab(char **tab);
-double  			ft_strtodbl(char *s);
+double				ft_strtodbl(char *s);
 void				create_thread(t_data *p);
-int 				get_color_pl(double t, t_data *q, t_vector d, t_vector l0, t_plane *o);
+int					get_color_pl(double t, t_data *q, t_vector d,
+		t_vector l0, t_plane *o);
 t_plane				plane_clon(const t_list *o);
 
 #endif

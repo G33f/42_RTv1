@@ -40,7 +40,8 @@ void	lights_init(t_data *p, char **s)
 	t_light		l1;
 	t_light		*l2;
 
-	l1 = light_init(ft_strtodbl(s[0]), ft_strtodbl(s[1]), ft_strtodbl(s[2]), ft_strtodbl(s[3]));
+	l1 = light_init(ft_strtodbl(s[0]), ft_strtodbl(s[1]),
+			ft_strtodbl(s[2]), ft_strtodbl(s[3]));
 	l2 = new_light(l1);
 	ft_lstadd(&p->light, ft_lstnew(l2, sizeof(t_light)));
 	free(l2);
@@ -67,7 +68,8 @@ int		set_light(t_data *p, char **tab)
 		lights_init(p, tab1);
 	if (ft_strequ(tab[0], "light") && ft_strequ(tab[1], "direction"))
 	{
-		p->l.l_d = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]), ft_atoi(tab1[2]));
+		p->l.l_d = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]),
+				ft_atoi(tab1[2]));
 		p->l.intens = ft_strtodbl(tab1[3]);
 		p->l.is_dir++;
 	}

@@ -66,7 +66,6 @@ int		figur_init(t_data *p, char *type, char *line)
 	{
 		free_tab(tab1);
 		return (error_output(PARAMETERS));
-		//return (-1);
 	}
 	o1 = obj_init1(new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]),
 	ft_atoi(tab1[2])), new_vec(ft_strtodbl(tab1[3]),
@@ -135,7 +134,5 @@ int		read_file(t_data *p, char *file)
 		return (error_output(NO_CAMERA));
 	init(p);
 	close(p->fd);
-	render(p);
-	drow(p);
 	return (0);
 }

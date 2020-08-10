@@ -12,9 +12,9 @@
 
 #include "rtv1.h"
 
-double			vec_length(t_vector a)
+double		vec_length(t_vector a)
 {
-	return(sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
+	return (sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
 }
 
 t_vector	vec_diff(t_vector a, t_vector b)
@@ -22,7 +22,7 @@ t_vector	vec_diff(t_vector a, t_vector b)
 	a.x -= b.x;
 	a.y -= b.y;
 	a.z -= b.z;
-	return(a);
+	return (a);
 }
 
 t_vector	vec_sum(t_vector a, t_vector b)
@@ -30,17 +30,15 @@ t_vector	vec_sum(t_vector a, t_vector b)
 	a.x += b.x;
 	a.y += b.y;
 	a.z += b.z;
-	return(a);
+	return (a);
 }
 
 t_vector	new_vec(double x, double y, double z)
 {
 	t_vector vec;
 
-	//ft_putstr("in new vec\n");
 	vec.x = x;
 	vec.y = y;
 	vec.z = z;
-	//printf("%f %f %f\n", vec.x, vec.y, vec.z);
-	return(vec);
+	return (vec);
 }

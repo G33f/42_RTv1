@@ -20,7 +20,6 @@ int		color(int color, double i)
 
 	red = (color >> 16) & 0xFF;
 	red = (int)(red * i);
-	//0xF1FFCC
 	if (red > 0x0000FF)
 		red = 0x0000FF;
 	green = (color >> 8) & 0xFF;

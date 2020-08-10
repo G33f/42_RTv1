@@ -23,10 +23,12 @@ int	drow(t_data *p)
 		x = 0;
 		while (x < WIN_SIZE_X)
 		{
-			p->img.img_data[x + y * WIN_SIZE_X] = p->canv.img_data[(x * p->camera.canv_w / WIN_SIZE_X) + p->camera.canv_w * (y * p->camera.canv_h / WIN_SIZE_Y)];
+			p->img.img_data[x + y * WIN_SIZE_X] = p->canv.img_data[(x *
+				p->camera.canv_w / WIN_SIZE_X) + p->camera.canv_w *
+				(y * p->camera.canv_h / WIN_SIZE_Y)];
 			x++;
 		}
 		y++;
 	}
-	return(0);
+	return (0);
 }

@@ -24,7 +24,6 @@ double	*disk_sphere(t_vector d, t_vector oc, t_obj *figur, double *t)
 
 	disk = pow((2 * vec_dot(oc, d)), 2) - (4 * vec_dot(d, d) *
 			(vec_dot(oc, oc) - pow(figur->r, 2)));
-
 	t[0] = ((-2 * vec_dot(oc, d)) + sqrt(disk)) / (2 * vec_dot(d, d));
 	t[1] = ((-2 * vec_dot(oc, d)) - sqrt(disk)) / (2 * vec_dot(d, d));
 	t[0] = min(t[0], t[1]);
@@ -46,11 +45,11 @@ double	*disk_cone(t_vector d, t_vector oc, t_obj *figur, double *t)
 	r.cos_a_sqr = pow(cos(figur->a), 2);
 	r.sin_a_sqr = pow(sin(figur->a), 2);
 	r.dot_oc_v = vec_dot(oc, figur->v);
-
-	a = r.cos_a_sqr * r.v_min_vdotva_sqr - (r.sin_a_sqr * pow(vec_dot(d, figur->v), 2));
-	b = 2 * r.cos_a_sqr * (vec_dot(r.v_min_vdotva, r.delta_p)) - (2 * r.sin_a_sqr * vec_dot(d, figur->v) * r.dot_oc_v);
+	a = r.cos_a_sqr * r.v_min_vdotva_sqr - (r.sin_a_sqr *
+			pow(vec_dot(d, figur->v), 2));
+	b = 2 * r.cos_a_sqr * (vec_dot(r.v_min_vdotva, r.delta_p)) -
+			(2 * r.sin_a_sqr * vec_dot(d, figur->v) * r.dot_oc_v);
 	c = r.cos_a_sqr * r.delta_p_sqr - (r.sin_a_sqr * pow(r.dot_oc_v, 2));
-
 	disk = pow(b, 2) - (4 * a * c);
 	t[0] = ((-b) + sqrt(disk)) / (2 * a);
 	t[1] = ((-b) - sqrt(disk)) / (2 * a);
@@ -65,10 +64,13 @@ double	*disk_cyl(t_vector d, t_vector oc, t_obj *figur, double *t)
 	double	c;
 	double	disk;
 
-	a = vec_dot(vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))), vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))));
-	b =	2 * vec_dot(vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))), vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))));
-	c = vec_dot(vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))), vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc)))) - pow(figur->r, 2);
-
+	a = vec_dot(vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v,
+		d))), vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))));
+	b = 2 * vec_dot(vec_diff(d, vec_mult_cst(figur->v, vec_dot(figur->v, d))),
+			vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))));
+	c = vec_dot(vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))),
+			vec_diff(oc, vec_mult_cst(figur->v, vec_dot(figur->v, oc))))
+					- pow(figur->r, 2);
 	disk = pow(b, 2) - (4 * a * c);
 	t[0] = ((-b) + sqrt(disk)) / (2 * a);
 	t[1] = ((-b) - sqrt(disk)) / (2 * a);

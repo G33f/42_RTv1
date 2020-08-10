@@ -82,9 +82,7 @@ int		render(t_data *p)
 	int x;
 	int	y;
 
-	//qn_rot(p, (t_qn){1, 1, 0, 0}, 0.2);
-	//qn_rot(p, (t_qn){1, 0, 0, 1}, 0.7);
-	rotation(p);	
+	rotation(p);
 	y = p->camera.y - p->camera.canv_h / 2;
 	i = 0;
 	while (y < p->camera.y + p->camera.canv_h / 2)
