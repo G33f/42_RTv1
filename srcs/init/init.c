@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:54:36 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 15:54:41 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/08/05 17:12:52 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,60 @@ t_obj	obj_clon(const t_list *o)
 	return(obj);
 }
 
-int camera_init(t_data *p)
+t_obj	obj_init2(t_obj obj, double specular, char *color, int type)
 {
-	p->camera.canv_h = 960;
-	p->camera.canv_w = 960;
-	p->camera.canv_d = 960;
-	p->camera.x = 0;
-	p->camera.y = 0;
-	p->camera.z = 0;
-	return(0);
+	obj.specular = specular;
+	if (ft_strequ(color, "red"))
+		obj.color = RED;
+	else if (ft_strequ(color, "green"))
+		obj.color = GREEN;
+	else if (ft_strequ(color, "blue"))
+		obj.color = BLUE;
+	else if (ft_strequ(color, "yellow"))
+		obj.color = YELLOW;
+	else if (ft_strequ(color, "aqua"))
+		obj.color = AQUA;
+	else if (ft_strequ(color, "gray"))
+		obj.color = GRAY;
+	else if (ft_strequ(color, "grey"))
+		obj.color = GREY;
+	else if (ft_strequ(color, "grey1"))
+		obj.color = GREY1;
+	else
+		obj.color = 249710846;
+	obj.type = type;
+	return (obj);
+}
+
+t_obj	obj_init1(t_vector c, t_vector v, double a, double r)
+{
+	t_obj	obj;
+
+	obj.c = c;
+	obj.v = v;
+	obj.a = a;
+	obj.r = r;
+	return (obj);
+}
+
+t_obj	*new_obj(t_obj new)
+{
+	t_obj	*obj;
+
+	obj = (t_obj*)malloc(sizeof(t_obj));
+	obj->c = new.c;
+	obj->v = new.v;
+	obj->a = new.a;
+	obj->r = new.r;
+	obj->specular = new.specular;
+	obj->color = new.color;
+	obj->type = new.type;
+	return (obj);
 }
 
 int	init(t_data *p)
 {
-	camera_init(p);
+	//camera_init(p);
 	init_mlx(p);
 	return(0);
 }

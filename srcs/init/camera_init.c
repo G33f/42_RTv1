@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   camera_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:55:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 15:55:14 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/14 15:03:31 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+t_orb	orb_init(int x, int y, int z, int r, char *color, double spec, int type)
+{
+	t_orb orb;
+
+	orb.x = x;
+	orb.y = y;
+	orb.z = z;
+	orb.r = r;
+	if (ft_strequ(color, "red"))
+		orb.color = RED;
+	else if (ft_strequ(color, "green"))
+		orb.color = GREEN;
+	else if (ft_strequ(color, "blue"))
+		orb.color = BLUE;
+	else if (ft_strequ(color, "yellow"))
+		orb.color = YELLOW;
+	else
+		orb.color = 249710846;
+	orb.specular = spec;
+	orb.type = type;
+	return(orb);
+}
 
 void	init_mlx(t_data *p)
 {

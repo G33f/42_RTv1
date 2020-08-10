@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 18:21:09 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/07/03 18:21:11 by wpoudre          ###   ########.fr       */
+/*   Updated: 2020/07/30 18:36:27 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ void	error(int cod)
 		error_log(1);
 	else if (cod == -13)
 		error_log(2);
+}
+
+int		error_output(int err)
+{
+	if (err == USAGE)
+		ft_putstr("\nUsage: ./RTv1 <scene>\n\n");
+	if (err == NO_CAMERA)
+		ft_putstr("\nFile is invalid: no camera in a scene\n\n");
+	if (err == NO_OBJECTS)
+		ft_putstr("\nFile is invalid: no objects found\n\n");
+	if (err == NO_FD)
+		ft_putstr("\nError: cannot open file\n\n");
+	if (err == PARAMETERS)
+		ft_putstr("\nObject is invalid: wrong number of parameters\n\n");
+	return (-1);
 }
