@@ -216,7 +216,7 @@ void				init_mlx(t_data *p);
 */
 t_obj				obj_init1(t_vector c, t_vector v, double a, double r);
 t_obj				obj_init2(t_obj obj, double specular, char *color,
-							   int type);
+						int type);
 t_obj				obj_clon(const t_list *o);
 t_obj				*new_obj(t_obj new);
 int					figur_init(t_data *p, char *type, char *line);
@@ -255,7 +255,7 @@ t_3_vec				new_vec_3(t_vector a, t_vector b, t_vector c);
 */
 double				light_ambient();
 double				light_point(t_data *p, t_3_vec tre, t_light *light,
-								  double s);
+						double s);
 double				light_direction(t_data *p, t_3_vec tre, double s);
 double				light_intens(t_data *p, t_3_vec tre, double s);
 double				spec(t_vector l, t_3_vec tre, double s, double i);
@@ -277,9 +277,9 @@ int					error_output(int err);
 **disc------------------------------------------
 */
 double				*disk_sphere(t_vector d, t_vector oc, t_obj *figur,
-								   double *t);
+							double *t);
 double				*disk_cone(t_vector d, t_vector oc, t_obj *figur,
-								 double *t);
+							double *t);
 double				*f_disk(t_vector d, t_vector oc, t_obj *figur, double *t);
 /*
 **norm------------------------------------------

@@ -23,7 +23,7 @@ t_obj	obj_clon(const t_list *o)
 	obj.specular = ((t_obj*)o->content)->specular;
 	obj.color = ((t_obj*)o->content)->color;
 	obj.type = ((t_obj*)o->content)->type;
-	return(obj);
+	return (obj);
 }
 
 t_obj	obj_init2(t_obj obj, double specular, char *color, int type)
@@ -77,9 +77,8 @@ t_obj	*new_obj(t_obj new)
 	return (obj);
 }
 
-int	init(t_data *p)
+int		init(t_data *p)
 {
-	//camera_init(p);
 	init_mlx(p);
-	return(0);
+	return (0);
 }

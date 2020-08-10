@@ -36,34 +36,27 @@ int		len_tab(char **tab)
 double	ft_strtodbl(char *s)
 {
 	char		**tab;
-	double		n;
+	t_vector	n;
 	int			i;
-	double		tmp;
 	int			len;
 	int			dot;
 
-	n = 0.0;
-	i = 0;
-	tmp = 0;
+	n.x = 0.0;
+	i = -1;
+	n.y = 0;
 	dot = 0;
-	while (s[i] != '\0')
-	{
+	while (s[++i] != '\0')
 		if (s[i] == '.')
 			dot++;
-		i++;
-	}
 	if (!dot)
 		return ((double)ft_atoi(s));
 	tab = ft_strsplit(s, '.');
-	n = (double)ft_atoi(tab[0]);
-	tmp = (double)ft_atoi(tab[1]);
+	n.x = (double)ft_atoi(tab[0]);
+	n.y = (double)ft_atoi(tab[1]);
 	len = ft_strlen(tab[1]);
-	while (len > 0)
-	{
-		tmp /= 10;
-		len--;
-	}
-	n += tmp;
+	while (--len > -1)
+		n.y /= 10;
+	n.x += n.y;
 	free_tab(tab);
-	return (n);
+	return (n.x);
 }
