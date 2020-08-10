@@ -96,7 +96,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-%.o: %.c $(LIB_INC)
+%.o: %.c $(LIB_INC) Makefile
 	gcc $(FLAGS) -I $(INCLUDES) -c $<
 
 clean:

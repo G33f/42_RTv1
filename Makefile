@@ -10,36 +10,55 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= RTv1
+NAME			=	RTv1
 
-SOURSE_DIRS		:= srcs srcs/error \
- 				   srcs/init \
- 				   srcs/main \
- 				   srcs/render \
- 				   srcs/vectors \
- 				   srcs/light \
- 				   srcs/parser \
- 				   srcs/utils \
- 				   srcs/figur \
- 				   srcs/rotation \
+SOURSE_DIRS		:=	srcs srcs/error \
+ 					srcs/init \
+ 					srcs/main \
+ 					srcs/render \
+ 					srcs/vectors \
+ 					srcs/light \
+ 					srcs/parser \
+ 					srcs/utils \
+ 					srcs/figur \
+ 					srcs/rotation \
 
-FLAGS			= -Wall -Werror -Wextra
+SRC				:=	srcs/error/error.c \
+                  	srcs/init/camera_init.c \
+                  	srcs/init/init.c \
+                  	srcs/main/main.c \
+                  	srcs/render/drow.c \
+                  	srcs/render/reander.c \
+                  	srcs/vectors/vec_multiply.c \
+                  	srcs/vectors/vector_sec.c \
+                  	srcs/vectors/vectors.c \
+                  	srcs/light/color.c \
+                  	srcs/light/light.c \
+                  	srcs/light/shadow_and_specular.c \
+                  	srcs/parser/camera.c \
+                  	srcs/parser/read_file.c \
+                  	srcs/parser/set_lights.c \
+                  	srcs/utils/utils.c \
+                  	srcs/figur/disc.c \
+                  	srcs/figur/norm.c \
+                  	srcs/rotation/qneon.c \
+                  	srcs/rotation/rotate.c \
 
-framework		= -L minilibx_macos -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L libft -lft
+FLAGS			=	-Wall -Werror -Wextra
 
-SEARCH_WILDCARDS:= $(addsuffix /*.c, $(SOURSE_DIRS))
+framework		=	-L minilibx_macos -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L libft -lft
 
-OBJECTS			= $(notdir $(patsubst %.c,%.o, $(wildcard $(SEARCH_WILDCARDS))))
+OBJECTS			=	$(notdir $(patsubst %.c,%.o, $(wildcard $(SRC))))
 
-LIB_DIR			= ./libft/
+LIB_DIR			=	./libft/
 
-LIB_OBJS		= $(addprefix $(LIB_DIR), $(LIB_OBJ))
+LIB_OBJS		=	$(addprefix $(LIB_DIR), $(LIB_OBJ))
 
-LIB_OBJ			= *.o
+LIB_OBJ			=	*.o
 
-RT_INC			= include/rtv1.h
+RT_INC			=	include/rtv1.h
 
-LIB_INC			= include/libft.h
+LIB_INC			=	include/libft.h
 
 all: $(NAME)
 
@@ -48,10 +67,10 @@ $(NAME): $(LIB_OBJS) $(OBJECTS)
 
 VPATH := $(SOURSE_DIRS)
 
-$(LIB_DIR)%.o: $(LIB_DIR)%.c $(LIB_INC)
+$(LIB_DIR)%.o: $(LIB_DIR)%.c $(LIB_INC) libft/Makefile
 	make -C $(LIB_DIR)
 
-%.o: %.c $(RT_INC)
+%.o: %.c $(RT_INC) Makefile
 	gcc $(FLAGS) -c $< -I include/
 
 clean:
