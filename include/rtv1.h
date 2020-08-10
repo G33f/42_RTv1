@@ -134,38 +134,6 @@ typedef struct		s_plane
 	struct s_plane	*next;
 }					t_plane;
 
-typedef	struct		s_t
-{
-	double			t_min;
-	double			t_max;
-}					t_t;
-
-typedef struct		s_light
-{
-	double			x;
-	double			y;
-	double			z;
-	double			intens;
-}					t_light;
-
-typedef struct		s_obj
-{
-	t_vector		c;
-	t_vector		v;
-	double			a;
-	double			r;
-	double			specular;
-	int				color;
-	int				type;
-}					t_obj;
-
-typedef struct		s_3_vec
-{
-	t_vector		p;
-	t_vector		n;
-	t_vector		v;
-}					t_3_vec;
-
 typedef struct		s_camera
 {
 	double			x;
@@ -248,7 +216,7 @@ void				init_mlx(t_data *p);
 */
 t_obj				obj_init1(t_vector c, t_vector v, double a, double r);
 t_obj				obj_init2(t_obj obj, double specular, char *color,
-		int type);
+							   int type);
 t_obj				obj_clon(const t_list *o);
 t_obj				*new_obj(t_obj new);
 int					figur_init(t_data *p, char *type, char *line);
@@ -287,7 +255,7 @@ t_3_vec				new_vec_3(t_vector a, t_vector b, t_vector c);
 */
 double				light_ambient();
 double				light_point(t_data *p, t_3_vec tre, t_light *light,
-		double s);
+								  double s);
 double				light_direction(t_data *p, t_3_vec tre, double s);
 double				light_intens(t_data *p, t_3_vec tre, double s);
 double				spec(t_vector l, t_3_vec tre, double s, double i);
@@ -309,9 +277,9 @@ int					error_output(int err);
 **disc------------------------------------------
 */
 double				*disk_sphere(t_vector d, t_vector oc, t_obj *figur,
-		double *t);
+								   double *t);
 double				*disk_cone(t_vector d, t_vector oc, t_obj *figur,
-		double *t);
+								 double *t);
 double				*f_disk(t_vector d, t_vector oc, t_obj *figur, double *t);
 /*
 **norm------------------------------------------
@@ -345,7 +313,7 @@ int					len_tab(char **tab);
 double				ft_strtodbl(char *s);
 void				create_thread(t_data *p);
 int					get_color_pl(double t, t_data *q, t_vector d,
-		t_vector l0, t_plane *o);
+									t_vector l0, t_plane *o);
 t_plane				plane_clon(const t_list *o);
 
 #endif
