@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:39:03 by mgalt             #+#    #+#             */
-/*   Updated: 2020/08/06 21:24:09 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/11 17:09:11 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,11 @@ int		set_light(t_data *p, char **tab)
 	if (len_tab(tab1) < 4)
 	{
 		free_tab(tab1);
-		return (-1);
+		error_output(PARAMETERS);
+		exit(0);
 	}
 	if (ft_strequ(tab[0], "light") && ft_strequ(tab[1], "point"))
 		lights_init(p, tab1);
-	if (ft_strequ(tab[0], "light") && ft_strequ(tab[1], "direction"))
-	{
-		p->l.l_d = new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]),
-				ft_atoi(tab1[2]));
-		p->l.intens = ft_strtodbl(tab1[3]);
-		p->l.is_dir++;
-	}
 	free_tab(tab1);
 	return (0);
 }

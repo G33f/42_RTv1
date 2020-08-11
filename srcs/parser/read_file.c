@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 18:06:23 by mgalt             #+#    #+#             */
-/*   Updated: 2020/08/06 21:18:49 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/11 17:10:38 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		figur_init(t_data *p, char *type, char *line)
 	if (tab_len < 10 || !t)
 	{
 		free_tab(tab1);
-		return (error_output(PARAMETERS));
+		exit(error_output(PARAMETERS));
 	}
 	o1 = obj_init1(new_vec(ft_atoi(tab1[0]), ft_atoi(tab1[1]),
 	ft_atoi(tab1[2])), new_vec(ft_strtodbl(tab1[3]),
@@ -113,7 +113,6 @@ int		read_file(t_data *p, char *file)
 	char	*line;
 
 	p->obj_n = object_num(file);
-	p->l.is_dir = 0;
 	if (p->obj_n == -1)
 		return (-1);
 	p->figur = NULL;

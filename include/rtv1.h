@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/06 21:25:04 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/11 17:07:02 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,6 @@ typedef struct		s_mlx
 	void			*mlx;
 }					t_mlx;
 
-typedef struct		s_l
-{
-	t_vector		l_d;
-	double			intens;
-	int				is_dir;
-}					t_l;
-
 typedef struct		s_res
 {
 	t_vector		d;
@@ -154,7 +147,6 @@ typedef struct		s_data
 	t_list			*figur;
 	t_list			*light;
 	t_qn			rot;
-	t_l				l;
 	double			ambient;
 	int				x;
 	int				y;
