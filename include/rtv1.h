@@ -27,8 +27,6 @@
 # define CYLINDER 2
 # define CONE 3
 # define PLANE 4
-# define LIGHT 5
-# define CAMERA 6
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 2831278
@@ -37,8 +35,8 @@
 # define GRAY 6447965
 # define GREY 9539985
 # define GREY1 7829367
-# define WIN_SIZE_X	960
-# define WIN_SIZE_Y	960
+# define WIN_SIZE_X	500
+# define WIN_SIZE_Y	500
 # define NO_CAMERA 7
 # define USAGE 8
 # define NO_OBJECTS 9
@@ -85,32 +83,6 @@ typedef struct		s_light
 	double			intens;
 }					t_light;
 
-typedef struct		s_cone
-{
-	int				x;
-	int				y;
-	int				z;
-	double			r;
-	int				vx;
-	int				vy;
-	int				vz;
-	double			specular;
-	int				color;
-	struct s_cone	*next;
-}					t_cone;
-
-typedef struct		s_orb
-{
-	int				x;
-	int				y;
-	int				z;
-	double			r;
-	double			specular;
-	int				color;
-	int				type;
-	struct s_orb	*next;
-}					t_orb;
-
 typedef struct		s_obj
 {
 	t_vector		c;
@@ -121,18 +93,6 @@ typedef struct		s_obj
 	int				color;
 	int				type;
 }					t_obj;
-
-typedef struct		s_plane
-{
-	int				x;
-	int				y;
-	int				z;
-	int				d;
-	t_vector		n;
-	int				color;
-	int				type;
-	struct s_plane	*next;
-}					t_plane;
 
 typedef struct		s_camera
 {
@@ -198,17 +158,13 @@ typedef struct		s_data
 	double			ambient;
 	int				x;
 	int				y;
-	int				max_x;
-	int				max_y;
 	int				obj_n;
 	int				fd;
-	int				line_nbr;
 }					t_data;
 
 /*
 **init------------------------------------------
 */
-int					camera_init(t_data *p);
 int					init(t_data *p);
 void				init_mlx(t_data *p);
 /*
@@ -228,7 +184,7 @@ void				render_cy(t_data *p, t_vector r, int j);
 t_res				ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t);
 int					drow(t_data *p);
 /*
-**rot -----------------------
+**rot-------------------------------------------
 */
 t_qn				qn_min(t_qn s);
 t_qn				qn_sum(t_qn q1, t_qn q2);
@@ -253,10 +209,8 @@ t_3_vec				new_vec_3(t_vector a, t_vector b, t_vector c);
 /*
 **light-----------------------------------------
 */
-double				light_ambient();
 double				light_point(t_data *p, t_3_vec tre, t_light *light,
 						double s);
-double				light_direction(t_data *p, t_3_vec tre, double s);
 double				light_intens(t_data *p, t_3_vec tre, double s);
 double				spec(t_vector l, t_3_vec tre, double s, double i);
 int					color(int color, double i);
@@ -303,17 +257,11 @@ int					len_tab(char **tab);
 void				free_tab(char **tab);
 int					set_light(t_data *p, char **tab);
 int					camera(t_data *p, char **tab);
-int					sphere_init(t_data *p, int *n, char *line);
 /*
 **utils-----------------------------------------
 */
 double				min(double a, double b);
-double				max(double a, double b);
 int					len_tab(char **tab);
 double				ft_strtodbl(char *s);
-void				create_thread(t_data *p);
-int					get_color_pl(double t, t_data *q, t_vector d,
-									t_vector l0, t_plane *o);
-t_plane				plane_clon(const t_list *o);
 
 #endif

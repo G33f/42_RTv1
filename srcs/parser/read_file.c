@@ -111,9 +111,7 @@ int		create_obj(t_data *p, char *line)
 int		read_file(t_data *p, char *file)
 {
 	char	*line;
-	int		i;
 
-	i = 0;
 	p->obj_n = object_num(file);
 	p->l.is_dir = 0;
 	if (p->obj_n == -1)

@@ -26,11 +26,6 @@ int		key_press(int key, t_data *p)
 	return (0);
 }
 
-void	print_vec(t_vector v)
-{
-	printf("x = %f\ny = %f\nz = %f\n", v.x, v.y, v.z);
-}
-
 int		main(int ac, char **av)
 {
 	t_data	p;

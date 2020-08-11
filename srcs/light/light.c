@@ -34,24 +34,6 @@ double	light_point(t_data *p, t_3_vec tre, t_light *light, double s)
 		return (0.0);
 }
 
-double	light_direction(t_data *p, t_3_vec tre, double s)
-{
-	double		intens;
-	double		n_dot_l;
-	t_t			t;
-
-	t.t_min = 0.000000000001;
-	t.t_max = 2147483647.0;
-	intens = 0.3;
-	n_dot_l = vec_dot(tre.n, p->l.l_d);
-	if (n_dot_l > 0 && !shadow_render_cy(p, new_vec_3(p->l.l_d, tre.p,
-			new_vec(0, 0, 1)), &t))
-		return ((intens * n_dot_l / (vec_length(tre.n) * vec_length(p->l.l_d))
-		+ spec(p->l.l_d, tre, s, intens)));
-	else
-		return (0.0);
-}
-
 double	light_intens(t_data *p, t_3_vec tre, double s)
 {
 	double	i;
@@ -60,7 +42,6 @@ double	light_intens(t_data *p, t_3_vec tre, double s)
 
 	t = p->light;
 	i = p->ambient;
-	i += light_direction(p, tre, s);
 	while (t != NULL)
 	{
 		l = light_clon(t);

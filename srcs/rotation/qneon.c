@@ -36,7 +36,7 @@ t_qn	qn_sum(t_qn q1, t_qn q2)
 
 void	magn(t_qn *st)
 {
-	int	magn;
+	double	magn;
 
 	magn = sqrt(pow(st->x, 2) + pow(st->y, 2) + pow(st->z, 2) + pow(st->w, 2));
 	st->x = st->x / magn;

@@ -21,15 +21,6 @@ double	min(double a, double b)
 	return (0.0);
 }
 
-double	max(double a, double b)
-{
-	if (a > b && a >= 0)
-		return (a);
-	if (b >= 0)
-		return (b);
-	return (0.0);
-}
-
 t_res	ray_tracing(t_data *p, t_vector r, t_obj *o, t_t *t)
 {
 	t_vector	d;
