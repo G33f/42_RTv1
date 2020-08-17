@@ -10,6 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 NAME			=	RTv1
 
 SOURSE_DIRS		:=	srcs srcs/error \
@@ -44,9 +45,9 @@ SRC				:=	srcs/error/error.c \
                   	srcs/rotation/qneon.c \
                   	srcs/rotation/rotate.c \
 
-FLAGS			=	-Wall -Werror -Wextra -O2
+FLAGS			=	-Wall -Werror -Wextra
 
-framework		=	-L minilibx_macos -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L ./libft -lft -O2
+framework		=	-L minilibx_macos -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L libft -lft
 
 OBJECTS			=	$(notdir $(patsubst %.c,%.o, $(wildcard $(SRC))))
 
@@ -60,32 +61,26 @@ RT_INC			=	include/rtv1.h
 
 LIB_INC			=	include/libft.h
 
-LIB_FILE		=	libft/libft.a
-
 LIB_MLX_FILE	=	minilibx_macos/libmlx.a
-
 
 all: $(NAME)
 
-$(NAME): $(LIB_FILE) $(LIB_MLX_FILE) $(OBJECTS)
-	gcc $(OBJECTS) -o $@ $(framework)
+$(NAME): $(LIB_OBJS) $(LIB_MLX_FILE) $(OBJECTS)
+	gcc -O2 -O1 -O3 $(OBJECTS) -o $@ $(framework)
+
+VPATH := $(SOURSE_DIRS)
 
 $(LIB_MLX_FILE):
 	make -C minilibx_macos
 
-VPATH := $(SOURSE_DIRS)
+$(LIB_DIR)%.o: $(LIB_DIR)%.c $(LIB_INC) libft/Makefile
+	make -C $(LIB_DIR)
 
 %.o: %.c $(RT_INC) Makefile
 	gcc $(FLAGS) -c $< -I include/
 
-$(LIB_FILE): libfilecheck
-
-libfilecheck:
-	@make -C $(LIB_DIR)
-
 clean:
 	make clean -C libft
-	make clean -C minilibx_macos
 	rm -rf *.o
 
 fclean: clean
@@ -94,4 +89,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libbfilecheck
+.PHONY: all clean fclean re
