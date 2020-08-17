@@ -47,7 +47,7 @@ SRC				:=	srcs/error/error.c \
 
 FLAGS			=	-Wall -Werror -Wextra
 
-framework		=	-L minilibx_macos -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L libft -lft
+framework		=	-L minilibx_macos -lmlx -framework OpenCL -framework OpenGL -framework AppKit -L libft -lft -O2
 
 OBJECTS			=	$(notdir $(patsubst %.c,%.o, $(wildcard $(SRC))))
 
@@ -66,7 +66,7 @@ LIB_MLX_FILE	=	minilibx_macos/libmlx.a
 all: $(NAME)
 
 $(NAME): $(LIB_OBJS) $(LIB_MLX_FILE) $(OBJECTS)
-	gcc -O2 -O1 -O3 $(OBJECTS) -o $@ $(framework)
+	gcc $(OBJECTS) -o $@ $(framework)
 
 VPATH := $(SOURSE_DIRS)
 
@@ -80,11 +80,12 @@ $(LIB_DIR)%.o: $(LIB_DIR)%.c $(LIB_INC) libft/Makefile
 	gcc $(FLAGS) -c $< -I include/
 
 clean:
-	make clean -C libft
+	make clean -C $(LIB_DIR)
+	make clean -C minilibx_macos
 	rm -rf *.o
 
 fclean: clean
-	make fclean -C libft
+	make fclean -C $(LIB_DIR)
 	rm -rf $(NAME)
 
 re: fclean all
