@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:54:36 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/05 17:12:52 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/22 19:10:10 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,13 @@ t_obj	obj_init1(t_vector c, t_vector v, double a, double r)
 
 	obj.c = c;
 	obj.v = v;
-	obj.a = a;
+	//a = convert_to_rad(a);
+	while (a > 360.0)
+		a -= 360.0;
+	while (a < 0.0)
+		a += 360.0;
+	obj.a = (a * PI) / 180.0;
+	//obj.a = a;
 	obj.r = r;
 	return (obj);
 }

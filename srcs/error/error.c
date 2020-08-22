@@ -54,5 +54,7 @@ int		error_output(int err)
 		ft_putstr("\nError: cannot open file\n\n");
 	if (err == PARAMETERS)
 		ft_putstr("\nObject is invalid: wrong number of parameters\n\n");
+	if (err == INVALID)
+		ft_putstr("\nInvalid Parameter\n\n");
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: mgalt <mgalt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:23:19 by wpoudre           #+#    #+#             */
-/*   Updated: 2020/08/11 17:07:02 by mgalt            ###   ########.fr       */
+/*   Updated: 2020/08/22 19:42:08 by mgalt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@
 # define NO_OBJECTS 9
 # define PARAMETERS 10
 # define NO_FD 11
-
+# define INVALID 12
+# define PI 3.141592
 typedef struct		s_vector
 {
 	double			x;
@@ -249,11 +250,13 @@ int					len_tab(char **tab);
 void				free_tab(char **tab);
 int					set_light(t_data *p, char **tab);
 int					camera(t_data *p, char **tab);
+double				convert_to_rad(double a);
 /*
 **utils-----------------------------------------
 */
 double				min(double a, double b);
 int					len_tab(char **tab);
 double				ft_strtodbl(char *s);
+void				check_tab_len(char **tab);
 
 #endif

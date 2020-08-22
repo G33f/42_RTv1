@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
 
 void	free_tab(char **tab)
 {
@@ -34,6 +33,16 @@ int		len_tab(char **tab)
 	return (i);
 }
 
+void	check_tab_len(char **tab)
+{
+	if (len_tab(tab) != 2)
+	{
+		free_tab(tab);
+		error_output(INVALID);
+		exit(-1);
+	}
+}
+
 double	ft_strtodbl(char *s)
 {
 	char		**tab;
@@ -52,6 +61,7 @@ double	ft_strtodbl(char *s)
 	if (!dot)
 		return ((double)ft_atoi(s));
 	tab = ft_strsplit(s, '.');
+	check_tab_len(tab);
 	n.x = (double)ft_atoi(tab[0]);
 	n.y = (double)ft_atoi(tab[1]);
 	len = ft_strlen(tab[1]);
