@@ -57,13 +57,11 @@ t_obj	obj_init1(t_vector c, t_vector v, double a, double r)
 
 	obj.c = c;
 	obj.v = v;
-	//a = convert_to_rad(a);
 	while (a > 360.0)
 		a -= 360.0;
 	while (a < 0.0)
 		a += 360.0;
 	obj.a = (a * PI) / 180.0;
-	//obj.a = a;
 	obj.r = r;
 	return (obj);
 }

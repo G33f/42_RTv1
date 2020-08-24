@@ -44,6 +44,7 @@
 # define NO_FD 11
 # define INVALID 12
 # define PI 3.141592
+
 typedef struct		s_vector
 {
 	double			x;

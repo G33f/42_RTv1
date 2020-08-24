@@ -16,19 +16,17 @@ int								ft_atoi(const char *str)
 {
 	static unsigned long		i;
 	unsigned long long			num;
-	int							mod;
+	static int					mod;
 
 	i = 0;
 	num = 0;
-	mod = 1;
 	if (!str)
 		return (0);
 	while (*(str + i) == '\n' || *(str + i) == '\t'  \
 	|| *(str + i) == '\r' || *(str + i) == '\v' \
 	|| *(str + i) == '\f' || *(str + i) == ' ')
 		i++;
-	if (*(str + i) == '-')
-		mod = -1;
+	mod = (*(str + i) == '-') ? -1 : 1;
 	if (*(str + i) == '-' || *(str + i) == '+')
 		i++;
 	while (*(str + i) && *(str + i) >= '0' && *(str + i) <= '9')
